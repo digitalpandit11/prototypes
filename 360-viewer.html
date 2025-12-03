@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360° Street View</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #panorama {
+            width: 100vw;
+            height: 100vh;
+        }
+        .info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .video-modal.active {
+            display: flex;
+        }
+        .video-container {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .close-btn:hover {
+            background: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <strong>360° Virtual Tour</strong><br>
+        Use mouse to look around | Scroll to zoom | Click hotspots for video
+    </div>
+    <div id="panorama"></div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-container">
+            <button class="close-btn" onclick="closeVideo()">✕ Close</button>
+            <iframe id="videoFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Initialize the 360° viewer
+        var viewer = pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": "7FDls.jpg",
+            "autoLoad": true,
+            "compass": true,
+            "northOffset": 0,
+            "hfov": 110,
+            "pitch": 0,
+            "yaw": 0,
+            "hotSpots": [
+                {
+                    "pitch": 0,
+                    "yaw": 0,
+                    "type": "info",
+                    "text": "Click to watch video",
+                    "clickHandlerFunc": showVideo,
+                    "clickHandlerArgs": "https://www.youtube.com/embed/DTsRfYsrvCc?autoplay=1"
+                },
+                {
+                    "pitch": -10,
+                    "yaw": 90,
+                    "type": "info",
+                    "text": "Building Tour",
+                    "clickHandlerFunc": showVideo,
+                    "clickHandlerArgs": "https://www.youtube.com/embed/DTsRfYsrvCc?autoplay=1"
+                },
+                {
+                    "pitch": 5,
+                    "yaw": -90,
+                    "type": "info",
+                    "text": "Property Details",
+                    "clickHandlerFunc": showVideo,
+                    "clickHandlerArgs": "https://www.youtube.com/embed/DTsRfYsrvCc?autoplay=1"
+                }
+            ]
+        });
+
+        // Function to show video modal
+        function showVideo(event, videoUrl) {
+            console.log('Loading video:', videoUrl);
+            document.getElementById('videoFrame').src = videoUrl;
+            document.getElementById('videoModal').classList.add('active');
+        }
+
+        // Function to close video modal
+        function closeVideo() {
+            document.getElementById('videoModal').classList.remove('active');
+            document.getElementById('videoFrame').src = '';
+        }
+
+        // Close video on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideo();
+            }
+        });
+    </script>
+</body>
+</html>
