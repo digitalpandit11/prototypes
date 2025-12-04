@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sessions - Mentor</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; }
+        .header { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .home-icon {
+            color: white;
+            font-size: 1.8em;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .home-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .header h1 { font-size: 1.5em; }
+        .container { display: flex; min-height: calc(100vh - 80px); }
+        .sidebar { width: 250px; background: white; padding: 20px 0; box-shadow: 2px 0 10px rgba(0,0,0,0.05); }
+        .sidebar-item { padding: 15px 30px; color: #555; text-decoration: none; display: block; transition: all 0.3s; border-left: 3px solid transparent; }
+        .sidebar-item:hover, .sidebar-item.active { background: #f0fbff; color: #00f2fe; border-left-color: #00f2fe; }
+        .main-content { flex: 1; padding: 30px; }
+        .page-header { margin-bottom: 30px; }
+        .page-header h2 { color: #333; font-size: 2em; }
+        .session-card { background: white; border-radius: 10px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .session-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px; }
+        .session-title { color: #333; font-size: 1.4em; font-weight: 600; margin-bottom: 10px; }
+        .session-meta { color: #666; font-size: 0.95em; }
+        .google-meet-link { background: linear-gradient(135deg, #4285f4 0%, #34a853 100%); color: white; padding: 15px; border-radius: 8px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; }
+        .status-badge { padding: 8px 20px; border-radius: 20px; font-weight: 600; font-size: 0.9em; }
+        .status-upcoming { background: #fff3cd; color: #856404; }
+        .status-completed { background: #d4edda; color: #155724; }
+        .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: 500; margin-right: 10px; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-primary { background: #4facfe; color: white; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <a href="index.html" class="home-icon" title="Back to Home">🏠</a>
+            <h1>👨‍🏫 Mentor Dashboard - My Sessions</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <a href="mentor-dashboard.html" class="sidebar-item">Dashboard</a>
+            <a href="mentor-availability.html" class="sidebar-item">Manage Availability</a>
+            <a href="mentor-sessions.html" class="sidebar-item active">My Sessions</a>
+            <a href="#" class="sidebar-item">Earnings</a>
+            <a href="#" class="sidebar-item">Profile Settings</a>
+            <a href="index.html" class="sidebar-item">Logout</a>
+        </div>
+        <div class="main-content">
+            <div class="page-header">
+                <h2>My Sessions</h2>
+            </div>
+            <div class="session-card">
+                <div class="session-header">
+                    <div>
+                        <div class="session-title">AWS EC2 Configuration</div>
+                        <div class="session-meta">
+                            👤 <strong>John Doe</strong> • 📅 Friday, June 16, 2023 • 🕐 10:00 AM - 11:00 AM
+                        </div>
+                    </div>
+                    <div class="status-badge status-upcoming">Upcoming</div>
+                </div>
+                <div class="google-meet-link">
+                    <div>
+                        <div style="font-weight: 600; margin-bottom: 3px;">📹 Google Meet Link</div>
+                        <a href="#" style="color: white;">meet.google.com/abc-defg-hij</a>
+                    </div>
+                    <button class="btn btn-success">Join Meeting</button>
+                </div>
+                <div>
+                    <strong>Topic Description:</strong> Learn AWS EC2 instance configuration, security groups, and best practices
+                </div>
+            </div>
+            <div class="session-card">
+                <div class="session-header">
+                    <div>
+                        <div class="session-title">Linux Administration</div>
+                        <div class="session-meta">
+                            👤 <strong>David Brown</strong> • 📅 Saturday, June 17, 2023 • 🕐 9:00 AM - 10:30 AM
+                        </div>
+                    </div>
+                    <div class="status-badge status-upcoming">Upcoming</div>
+                </div>
+                <div>
+                    <strong>Topic Description:</strong> Advanced Linux system administration and troubleshooting
+                </div>
+                <div style="margin-top: 15px;">
+                    <button class="btn btn-primary">View Details</button>
+                    <button class="btn btn-primary">Contact Student</button>
+                </div>
+            </div>
+            <div class="session-card">
+                <div class="session-header">
+                    <div>
+                        <div class="session-title">Docker Basics</div>
+                        <div class="session-meta">
+                            👤 <strong>Mike Chen</strong> • 📅 Thursday, June 15, 2023 • 🕐 2:00 PM - 3:00 PM
+                        </div>
+                    </div>
+                    <div class="status-badge status-completed">Completed</div>
+                </div>
+                <div>
+                    <strong>Recording Status:</strong> ✅ Available<br>
+                    <strong>Student Rating:</strong> ⭐⭐⭐⭐⭐ "Excellent session!"
+                </div>
+                <div style="margin-top: 15px;">
+                    <button class="btn btn-primary">View Recording</button>
+                    <button class="btn btn-primary">Download Recording</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

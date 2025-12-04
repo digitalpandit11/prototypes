@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout & Payment - Self-Paced Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .home-icon {
+            color: white;
+            font-size: 1.8em;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .home-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .header h1 {
+            font-size: 1.5em;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+        }
+        .checkout-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section-title {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .booking-info {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+        .info-value {
+            color: #333;
+            font-weight: 600;
+        }
+        .google-meet-banner {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .google-meet-icon {
+            font-size: 3em;
+        }
+        .google-meet-text h4 {
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+        .google-meet-text p {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+        .payment-options {
+            margin-bottom: 25px;
+        }
+        .payment-option {
+            border: 2px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .payment-option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .payment-option.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .payment-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            position: relative;
+        }
+        .payment-radio.selected::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+        .payment-info {
+            flex: 1;
+        }
+        .payment-title {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        .payment-description {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+        }
+        .order-summary {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .summary-title {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #666;
+        }
+        .summary-item.total {
+            color: #333;
+            font-size: 1.3em;
+            font-weight: 700;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+        .credits-balance {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .credits-balance h3 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+        .credits-balance p {
+            opacity: 0.9;
+        }
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 10px;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .btn-secondary:hover {
+            background: #f8f9ff;
+        }
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .security-badge {
+            background: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <a href="index.html" class="home-icon" title="Back to Home">🏠</a>
+            <h1>Self-Paced Training Management</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 style="color: #333; margin-bottom: 30px; text-align: center; font-size: 2.2em;">Complete Your Booking</h2>
+
+        <div class="checkout-grid">
+            <div class="checkout-section">
+                <h3 class="section-title">Session Details</h3>
+
+                <div class="google-meet-banner">
+                    <div class="google-meet-icon">📹</div>
+                    <div class="google-meet-text">
+                        <h4>Google Meet Integration Enabled</h4>
+                        <p>Meeting link and credentials will be sent to your email and phone 30 minutes before the session. Recording will be available after the session.</p>
+                    </div>
+                </div>
+
+                <div class="booking-info">
+                    <div class="info-row">
+                        <span class="info-label">Mentor:</span>
+                        <span class="info-value">Raghav Sharma</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Date & Time:</span>
+                        <span class="info-value">Friday, June 16, 2023 at 10:00 AM</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Duration:</span>
+                        <span class="info-value">1 Hour</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Topic:</span>
+                        <span class="info-value">AWS EC2 Configuration</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Contact Email:</span>
+                        <span class="info-value">john.doe@example.com</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Phone:</span>
+                        <span class="info-value">+91 98765 43210</span>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Payment Method</h3>
+
+                <div class="payment-options">
+                    <div class="payment-option selected">
+                        <div class="payment-radio selected"></div>
+                        <div class="payment-info">
+                            <div class="payment-title">💳 Use Credits</div>
+                            <div class="payment-description">Pay using your available credits (Fastest option)</div>
+                        </div>
+                    </div>
+
+                    <div class="payment-option">
+                        <div class="payment-radio"></div>
+                        <div class="payment-info">
+                            <div class="payment-title">💰 Buy Credits with Card</div>
+                            <div class="payment-description">Purchase credits and complete booking</div>
+                        </div>
+                    </div>
+
+                    <div class="payment-option">
+                        <div class="payment-radio"></div>
+                        <div class="payment-info">
+                            <div class="payment-title">🏦 UPI / Net Banking</div>
+                            <div class="payment-description">Direct payment via UPI or Net Banking</div>
+                        </div>
+                    </div>
+
+                    <div class="payment-option">
+                        <div class="payment-radio"></div>
+                        <div class="payment-info">
+                            <div class="payment-title">📱 Wallets (PayPal, GPay, PhonePe)</div>
+                            <div class="payment-description">Pay using digital wallets</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-badges">
+                    <div class="security-badge">🔒 Secure Payment</div>
+                    <div class="security-badge">✓ SSL Encrypted</div>
+                    <div class="security-badge">💯 100% Safe</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="checkout-section">
+                    <h3 class="section-title">Order Summary</h3>
+
+                    <div class="credits-balance">
+                        <h3>24</h3>
+                        <p>Available Credits</p>
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="summary-item">
+                            <span>Session Duration:</span>
+                            <span>1 Hour</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Credits Required:</span>
+                            <span>3 Credits</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Platform Fee:</span>
+                            <span>0 Credits</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Google Meet Recording:</span>
+                            <span>Free</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span>Total:</span>
+                            <span>3 Credits</span>
+                        </div>
+                    </div>
+
+                    <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <div style="color: #2e7d32; font-weight: 600; margin-bottom: 5px;">✓ After Booking:</div>
+                        <div style="color: #388e3c; font-size: 0.95em;">Remaining Balance: 21 Credits</div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="alert('Booking Confirmed! Google Meet link has been sent to your email and phone.')">Confirm & Pay</button>
+                    <button class="btn btn-secondary" onclick="history.back()">Cancel</button>
+                </div>
+
+                <div class="checkout-section" style="margin-top: 20px;">
+                    <h4 style="color: #333; margin-bottom: 15px;">📋 What Happens Next?</h4>
+                    <ul style="color: #666; line-height: 2; margin-left: 20px;">
+                        <li>Instant booking confirmation email</li>
+                        <li>Google Meet link 30 mins before session</li>
+                        <li>SMS reminder 10 mins before session</li>
+                        <li>Auto-recorded session saved to dashboard</li>
+                        <li>Recording available within 24 hours</li>
+                        <li>Lifetime access to recording</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

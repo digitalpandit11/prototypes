@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Courses - Self-Paced Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .home-icon {
+            color: white;
+            font-size: 1.8em;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .home-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .header h1 {
+            font-size: 1.5em;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+        .sidebar {
+            width: 250px;
+            background: white;
+            padding: 20px 0;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+        }
+        .sidebar-item {
+            padding: 15px 30px;
+            color: #555;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-item:hover,
+        .sidebar-item.active {
+            background: #f8f9ff;
+            color: #667eea;
+            border-left-color: #667eea;
+        }
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .page-header h2 {
+            color: #333;
+            font-size: 2em;
+        }
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .filter-group label {
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .filter-group select,
+        .filter-group input {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .course-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4em;
+            position: relative;
+        }
+        .course-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.3em;
+            font-weight: 600;
+        }
+        .course-content {
+            padding: 25px;
+        }
+        .course-title {
+            color: #333;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        .course-description {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .course-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 8px;
+        }
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .meta-label {
+            color: #999;
+            font-size: 0.85em;
+            margin-bottom: 3px;
+        }
+        .meta-value {
+            color: #333;
+            font-weight: 600;
+        }
+        .course-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s;
+            flex: 1;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #555;
+        }
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <a href="index.html" class="home-icon" title="Back to Home">🏠</a>
+            <h1>Self-Paced Training Management</h1>
+        </div>
+        <div class="user-info">
+            <span>John Doe</span>
+            <div class="user-avatar">JD</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <a href="student-dashboard.html" class="sidebar-item">Dashboard</a>
+            <a href="student-mentors.html" class="sidebar-item">Mentors</a>
+            <a href="student-sessions.html" class="sidebar-item">Session History</a>
+            <a href="student-courses.html" class="sidebar-item active">Courses</a>
+            <a href="student-courses.html" class="sidebar-item">Workshops</a>
+            <a href="student-recordings.html" class="sidebar-item">Recorded Sessions</a>
+            <a href="#" class="sidebar-item">My Queries</a>
+            <a href="#" class="sidebar-item">My Assignments</a>
+            <a href="#" class="sidebar-item">My Projects</a>
+            <a href="index.html" class="sidebar-item">Logout</a>
+        </div>
+
+        <div class="main-content">
+            <div class="page-header">
+                <h2>Browse Courses & Workshops</h2>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>Category</label>
+                        <select>
+                            <option>All Categories</option>
+                            <option>Programming</option>
+                            <option>Cloud Computing</option>
+                            <option>Data Science</option>
+                            <option>DevOps</option>
+                            <option>System Administration</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Level</label>
+                        <select>
+                            <option>All Levels</option>
+                            <option>Beginner</option>
+                            <option>Intermediate</option>
+                            <option>Advanced</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Duration</label>
+                        <select>
+                            <option>Any Duration</option>
+                            <option>0-20 hours</option>
+                            <option>20-40 hours</option>
+                            <option>40+ hours</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Search</label>
+                        <input type="text" placeholder="Search courses...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        🐧
+                        <div class="course-badge">Intermediate</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title">Linux Administration Masterclass</div>
+                        <div class="course-description">
+                            Complete guide to Linux system administration, including user management, networking, and security.
+                        </div>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Duration</span>
+                                <span class="meta-value">40 Hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Credits</span>
+                                <span class="meta-value">5 Credits</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Students</span>
+                                <span class="meta-value">1,234</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Rating</span>
+                                <span class="meta-value">⭐ 4.8</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-secondary">Details</button>
+                            <button class="btn btn-primary" onclick="window.location.href='student-booking.html'">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        🐍
+                        <div class="course-badge">Beginner</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title">Python Programming Fundamentals</div>
+                        <div class="course-description">
+                            Learn Python from scratch with hands-on projects, data structures, and OOP concepts.
+                        </div>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Duration</span>
+                                <span class="meta-value">30 Hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Credits</span>
+                                <span class="meta-value">4 Credits</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Students</span>
+                                <span class="meta-value">2,567</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Rating</span>
+                                <span class="meta-value">⭐ 4.9</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-secondary">Details</button>
+                            <button class="btn btn-primary" onclick="window.location.href='student-booking.html'">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        ☁️
+                        <div class="course-badge">Advanced</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title">AWS Cloud Architect Bootcamp</div>
+                        <div class="course-description">
+                            Master AWS services, architecture patterns, and prepare for AWS Solutions Architect certification.
+                        </div>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Duration</span>
+                                <span class="meta-value">50 Hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Credits</span>
+                                <span class="meta-value">8 Credits</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Students</span>
+                                <span class="meta-value">987</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Rating</span>
+                                <span class="meta-value">⭐ 4.7</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-secondary">Details</button>
+                            <button class="btn btn-primary" onclick="window.location.href='student-booking.html'">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        🐳
+                        <div class="course-badge">Intermediate</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title">Docker & Kubernetes DevOps</div>
+                        <div class="course-description">
+                            Learn containerization with Docker and orchestration with Kubernetes for modern DevOps.
+                        </div>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Duration</span>
+                                <span class="meta-value">35 Hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Credits</span>
+                                <span class="meta-value">6 Credits</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Students</span>
+                                <span class="meta-value">1,456</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Rating</span>
+                                <span class="meta-value">⭐ 4.8</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-secondary">Details</button>
+                            <button class="btn btn-primary" onclick="window.location.href='student-booking.html'">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        📊
+                        <div class="course-badge">Intermediate</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title">Data Science with Python</div>
+                        <div class="course-description">
+                            Master data analysis, visualization, and machine learning using Python and popular libraries.
+                        </div>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Duration</span>
+                                <span class="meta-value">45 Hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Credits</span>
+                                <span class="meta-value">7 Credits</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Students</span>
+                                <span class="meta-value">1,823</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Rating</span>
+                                <span class="meta-value">⭐ 4.9</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-secondary">Details</button>
+                            <button class="btn btn-primary" onclick="window.location.href='student-booking.html'">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-image">
+                        ⚛️
+                        <div class="course-badge">Intermediate</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-title">Full Stack React & Node.js</div>
+                        <div class="course-description">
+                            Build modern web applications with React frontend and Node.js backend with MongoDB.
+                        </div>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Duration</span>
+                                <span class="meta-value">55 Hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Credits</span>
+                                <span class="meta-value">8 Credits</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Students</span>
+                                <span class="meta-value">2,034</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Rating</span>
+                                <span class="meta-value">⭐ 4.7</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-secondary">Details</button>
+                            <button class="btn btn-primary" onclick="window.location.href='student-booking.html'">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Paced Training Management - Wireframe Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        .note h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        .note ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        .wireframe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .wireframe-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            color: white;
+        }
+        .wireframe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .wireframe-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .wireframe-card p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        .wireframe-card a {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .wireframe-card a:hover {
+            background: #f0f0f0;
+        }
+        .section-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #667eea;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Self-Paced Training Management System</h1>
+        <p class="subtitle">Interactive Wireframe Prototype</p>
+
+        <div class="note">
+            <h3>Key Features Included:</h3>
+            <ul>
+                <li>Google Meet API Integration for scheduling and credentials sharing</li>
+                <li>Recorded session storage and playback for students</li>
+                <li>Credit-based booking system</li>
+                <li>Multi-role access (Student, Mentor, Admin, Corporate, College)</li>
+                <li>Payment gateway integration</li>
+                <li>Session history and management</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">Student Portal</h2>
+        <div class="wireframe-grid">
+            <div class="wireframe-card">
+                <h3>Student Login</h3>
+                <p>Authentication page for students</p>
+                <a href="student-login.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Student Dashboard</h3>
+                <p>Main dashboard with credits, sessions, and quick actions</p>
+                <a href="student-dashboard.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Browse Mentors</h3>
+                <p>Search and filter available mentors</p>
+                <a href="student-mentors.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Browse Courses</h3>
+                <p>Available courses and workshops</p>
+                <a href="student-courses.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Book Appointment</h3>
+                <p>Schedule 1-to-1 session with Google Meet</p>
+                <a href="student-booking.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Session History</h3>
+                <p>Past and upcoming sessions with recordings</p>
+                <a href="student-sessions.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Recorded Sessions</h3>
+                <p>Access recorded Google Meet sessions</p>
+                <a href="student-recordings.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Checkout & Payment</h3>
+                <p>Payment processing for bookings</p>
+                <a href="student-checkout.html">View Wireframe</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">Mentor Portal</h2>
+        <div class="wireframe-grid">
+            <div class="wireframe-card">
+                <h3>Mentor Login</h3>
+                <p>Authentication page for mentors</p>
+                <a href="mentor-login.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Mentor Dashboard</h3>
+                <p>Schedule, upcoming sessions, earnings</p>
+                <a href="mentor-dashboard.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Availability Management</h3>
+                <p>Set available time slots</p>
+                <a href="mentor-availability.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Session Management</h3>
+                <p>Manage booked sessions and recordings</p>
+                <a href="mentor-sessions.html">View Wireframe</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">Admin Portal</h2>
+        <div class="wireframe-grid">
+            <div class="wireframe-card">
+                <h3>Super Admin Login</h3>
+                <p>Admin authentication</p>
+                <a href="admin-login.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Admin Dashboard</h3>
+                <p>Overview of system analytics</p>
+                <a href="admin-dashboard.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Manage Students</h3>
+                <p>Student enrollment and management</p>
+                <a href="admin-students.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Manage Mentors</h3>
+                <p>Mentor profiles and scheduling</p>
+                <a href="admin-mentors.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Payments & Billing</h3>
+                <p>Transaction history and reports</p>
+                <a href="admin-payments.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Google Meet Settings</h3>
+                <p>Configure Google Meet integration</p>
+                <a href="admin-meet-settings.html">View Wireframe</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">Corporate/College Portal</h2>
+        <div class="wireframe-grid">
+            <div class="wireframe-card">
+                <h3>Corporate Login</h3>
+                <p>Corporate client authentication</p>
+                <a href="corporate-login.html">View Wireframe</a>
+            </div>
+            <div class="wireframe-card">
+                <h3>Corporate Dashboard</h3>
+                <p>Bulk enrollment and reporting</p>
+                <a href="corporate-dashboard.html">View Wireframe</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
