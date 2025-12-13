@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Post - Data Visualization Explosion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .canvas {
+            width: 1080px;
+            height: 1080px;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gradient rays from center */
+        .rays {
+            position: absolute;
+            inset: 0;
+            background:
+                conic-gradient(from 0deg at 50% 50%,
+                    transparent 0deg,
+                    rgba(255, 0, 100, 0.1) 45deg,
+                    transparent 90deg,
+                    rgba(0, 255, 200, 0.1) 135deg,
+                    transparent 180deg,
+                    rgba(255, 200, 0, 0.1) 225deg,
+                    transparent 270deg,
+                    rgba(100, 0, 255, 0.1) 315deg,
+                    transparent 360deg
+                );
+            animation: rotateRays 20s linear infinite;
+        }
+
+        @keyframes rotateRays {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            padding: 50px;
+            gap: 30px;
+        }
+
+        /* Social Icons Row */
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .social-orb {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #fff;
+            position: relative;
+            box-shadow:
+                0 0 30px currentColor,
+                0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: orbFloat 3s ease-in-out infinite;
+        }
+
+        .social-orb::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, currentColor, transparent, currentColor);
+            opacity: 0.5;
+            z-index: -1;
+            filter: blur(10px);
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .social-orb:nth-child(1) { color: #1877f2; animation-delay: 0s; }
+        .social-orb:nth-child(2) { color: #E1306C; animation-delay: 0.2s; }
+        .social-orb:nth-child(3) { color: #1DA1F2; animation-delay: 0.4s; }
+        .social-orb:nth-child(4) { color: #0077b5; animation-delay: 0.6s; }
+        .social-orb:nth-child(5) { color: #FF0000; animation-delay: 0.8s; }
+        .social-orb:nth-child(6) { color: #69c9d0; animation-delay: 1s; }
+        .social-orb:nth-child(7) { color: #25D366; animation-delay: 1.2s; }
+        .social-orb:nth-child(8) { color: #E60023; animation-delay: 1.4s; }
+
+        /* Center Funnel + Chart Combo */
+        .main-viz {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        /* Vertical Funnel */
+        .funnel-vert {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .funnel-step {
+            background: rgba(255, 255, 255, 0.05);
+            border: 3px solid;
+            border-radius: 25px;
+            padding: 25px 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            box-shadow:
+                0 0 30px currentColor,
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .funnel-step:hover {
+            transform: translateX(15px);
+            box-shadow:
+                0 0 50px currentColor,
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .step-1 {
+            width: 100%;
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+
+        .step-2 {
+            width: 85%;
+            border-color: #ff00ff;
+            color: #ff00ff;
+        }
+
+        .step-3 {
+            width: 70%;
+            border-color: #ffff00;
+            color: #ffff00;
+        }
+
+        .step-icon {
+            font-size: 52px;
+        }
+
+        .step-data {
+            flex: 1;
+            text-align: center;
+        }
+
+        .step-num {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px currentColor;
+        }
+
+        .step-lbl {
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        /* 3D Chart */
+        .chart-3d {
+            perspective: 1000px;
+            height: 450px;
+            position: relative;
+        }
+
+        .chart-container {
+            transform-style: preserve-3d;
+            transform: rotateX(15deg) rotateY(-15deg);
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .chart-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .col-bars {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .chart-bar-3d {
+            width: 45px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            transform-style: preserve-3d;
+            box-shadow:
+                0 0 20px currentColor,
+                0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .chart-bar-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: currentColor;
+            border-radius: 8px;
+            filter: brightness(1.5);
+            transform: translateZ(10px);
+        }
+
+        .chart-bar-3d::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 10px;
+            height: 100%;
+            background: currentColor;
+            filter: brightness(0.6);
+            transform-origin: left;
+            transform: rotateY(90deg);
+        }
+
+        .bar-lead {
+            background: linear-gradient(180deg, #00ffff 0%, #0088ff 100%);
+            color: #00ffff;
+        }
+
+        .bar-sale {
+            background: linear-gradient(180deg, #ff00ff 0%, #ff0088 100%);
+            color: #ff00ff;
+        }
+
+        .col-label {
+            font-size: 14px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        /* Bottom Mega Stats */
+        .mega-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .mega-stat {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mega-stat::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            height: 4px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00, #00ffff);
+            background-size: 200% 100%;
+            animation: borderFlow 2s linear infinite;
+        }
+
+        @keyframes borderFlow {
+            from { background-position: 0% 0%; }
+            to { background-position: 200% 0%; }
+        }
+
+        .mega-emoji {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .mega-val {
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .mega-lbl {
+            font-size: 13px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas">
+        <div class="rays"></div>
+
+        <div class="content">
+            <!-- Social Icons -->
+            <div class="social-row">
+                <div class="social-orb"><i class="fab fa-facebook-f"></i></div>
+                <div class="social-orb"><i class="fab fa-instagram"></i></div>
+                <div class="social-orb"><i class="fab fa-twitter"></i></div>
+                <div class="social-orb"><i class="fab fa-linkedin-in"></i></div>
+                <div class="social-orb"><i class="fab fa-youtube"></i></div>
+                <div class="social-orb"><i class="fab fa-tiktok"></i></div>
+                <div class="social-orb"><i class="fab fa-whatsapp"></i></div>
+                <div class="social-orb"><i class="fab fa-pinterest-p"></i></div>
+            </div>
+
+            <!-- Main Viz -->
+            <div class="main-viz">
+                <!-- Funnel -->
+                <div class="funnel-vert">
+                    <div class="funnel-step step-1">
+                        <div class="step-icon">🎯</div>
+                        <div class="step-data">
+                            <div class="step-num">10K</div>
+                            <div class="step-lbl">Traffic</div>
+                        </div>
+                    </div>
+                    <div class="funnel-step step-2">
+                        <div class="step-icon">🔥</div>
+                        <div class="step-data">
+                            <div class="step-num">5K</div>
+                            <div class="step-lbl">Leads</div>
+                        </div>
+                    </div>
+                    <div class="funnel-step step-3">
+                        <div class="step-icon">💰</div>
+                        <div class="step-data">
+                            <div class="step-num">2.5K</div>
+                            <div class="step-lbl">Sales</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3D Chart -->
+                <div class="chart-3d">
+                    <div class="chart-container">
+                        <div class="chart-col">
+                            <div class="col-bars">
+                                <div class="chart-bar-3d bar-lead" style="height: 120px;"></div>
+                                <div class="chart-bar-3d bar-sale" style="height: 80px;"></div>
+                            </div>
+                            <div class="col-label">Jan</div>
+                        </div>
+                        <div class="chart-col">
+                            <div class="col-bars">
+                                <div class="chart-bar-3d bar-lead" style="height: 160px;"></div>
+                                <div class="chart-bar-3d bar-sale" style="height: 110px;"></div>
+                            </div>
+                            <div class="col-label">Feb</div>
+                        </div>
+                        <div class="chart-col">
+                            <div class="col-bars">
+                                <div class="chart-bar-3d bar-lead" style="height: 200px;"></div>
+                                <div class="chart-bar-3d bar-sale" style="height: 145px;"></div>
+                            </div>
+                            <div class="col-label">Mar</div>
+                        </div>
+                        <div class="chart-col">
+                            <div class="col-bars">
+                                <div class="chart-bar-3d bar-lead" style="height: 240px;"></div>
+                                <div class="chart-bar-3d bar-sale" style="height: 180px;"></div>
+                            </div>
+                            <div class="col-label">Apr</div>
+                        </div>
+                        <div class="chart-col">
+                            <div class="col-bars">
+                                <div class="chart-bar-3d bar-lead" style="height: 280px;"></div>
+                                <div class="chart-bar-3d bar-sale" style="height: 220px;"></div>
+                            </div>
+                            <div class="col-label">May</div>
+                        </div>
+                        <div class="chart-col">
+                            <div class="col-bars">
+                                <div class="chart-bar-3d bar-lead" style="height: 320px;"></div>
+                                <div class="chart-bar-3d bar-sale" style="height: 260px;"></div>
+                            </div>
+                            <div class="col-label">Jun</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Stats -->
+            <div class="mega-stats">
+                <div class="mega-stat">
+                    <div class="mega-emoji">📈</div>
+                    <div class="mega-val">250%</div>
+                    <div class="mega-lbl">ROI</div>
+                </div>
+                <div class="mega-stat">
+                    <div class="mega-emoji">🎯</div>
+                    <div class="mega-val">82%</div>
+                    <div class="mega-lbl">Conv Rate</div>
+                </div>
+                <div class="mega-stat">
+                    <div class="mega-emoji">💵</div>
+                    <div class="mega-val">$125K</div>
+                    <div class="mega-lbl">Revenue</div>
+                </div>
+                <div class="mega-stat">
+                    <div class="mega-emoji">⚡</div>
+                    <div class="mega-val">5.2K</div>
+                    <div class="mega-lbl">Leads</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

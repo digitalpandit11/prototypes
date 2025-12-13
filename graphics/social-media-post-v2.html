@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Post - Explosive Growth</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', sans-serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .canvas {
+            width: 1080px;
+            height: 1080px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Electric lines background */
+        .electric-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(90deg, transparent 49%, rgba(255, 0, 255, 0.1) 50%, transparent 51%),
+                linear-gradient(0deg, transparent 49%, rgba(0, 255, 255, 0.1) 50%, transparent 51%);
+            background-size: 50px 50px;
+            animation: electricPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes electricPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Social Grid - Compact Top */
+        .social-compact {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-pill {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid;
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+        }
+
+        .social-pill:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .social-pill i {
+            font-size: 24px;
+        }
+
+        .pill-fb { border-color: #1877f2; }
+        .pill-fb i { color: #1877f2; }
+        .pill-ig { border-color: #E1306C; }
+        .pill-ig i { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .pill-tw { border-color: #1DA1F2; }
+        .pill-tw i { color: #1DA1F2; }
+        .pill-li { border-color: #0077b5; }
+        .pill-li i { color: #0077b5; }
+        .pill-yt { border-color: #FF0000; }
+        .pill-yt i { color: #FF0000; }
+        .pill-tk { border-color: #69c9d0; }
+        .pill-tk i { color: #69c9d0; }
+
+        /* Massive Funnel Visualization */
+        .funnel-mega {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .funnel-viz {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .funnel-layer {
+            position: relative;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .funnel-bar {
+            height: 100px;
+            background: linear-gradient(90deg, transparent, currentColor, transparent);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+            box-shadow:
+                0 0 40px currentColor,
+                inset 0 0 20px rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .funnel-bar::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+
+        .layer-1 .funnel-bar {
+            width: 100%;
+            color: #00ffff;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+        }
+
+        .layer-2 .funnel-bar {
+            width: 70%;
+            color: #ff00ff;
+            background: linear-gradient(90deg, transparent, #ff00ff, transparent);
+        }
+
+        .layer-3 .funnel-bar {
+            width: 45%;
+            color: #ffff00;
+            background: linear-gradient(90deg, transparent, #ffff00, transparent);
+        }
+
+        .funnel-label {
+            position: absolute;
+            left: -180px;
+            font-size: 22px;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .funnel-number {
+            font-size: 52px;
+            font-weight: 900;
+            text-shadow:
+                0 0 20px currentColor,
+                0 0 40px currentColor;
+        }
+
+        .funnel-icon {
+            font-size: 60px;
+            position: absolute;
+            right: -100px;
+        }
+
+        /* Bottom Explosion Stats */
+        .explosion-stats {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .explosion-box {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.5);
+            border: 3px solid;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .explosion-box::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, currentColor, transparent, currentColor);
+            border-radius: 20px;
+            z-index: -1;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .explosion-box:nth-child(1) {
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+
+        .explosion-box:nth-child(2) {
+            border-color: #ff00ff;
+            color: #ff00ff;
+        }
+
+        .explosion-box:nth-child(3) {
+            border-color: #ffff00;
+            color: #ffff00;
+        }
+
+        .explosion-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .explosion-value {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow:
+                0 0 20px currentColor,
+                0 0 40px currentColor,
+                0 0 60px currentColor;
+        }
+
+        .explosion-label {
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            color: #fff;
+            font-size: 30px;
+            animation: twinkle 1.5s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 15%; right: 15%; animation-delay: 0.3s; }
+        .sparkle:nth-child(3) { top: 40%; left: 5%; animation-delay: 0.6s; }
+        .sparkle:nth-child(4) { top: 50%; right: 8%; animation-delay: 0.9s; }
+        .sparkle:nth-child(5) { bottom: 30%; left: 12%; animation-delay: 1.2s; }
+        .sparkle:nth-child(6) { bottom: 25%; right: 10%; animation-delay: 1.5s; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.3) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas">
+        <div class="electric-bg"></div>
+
+        <!-- Sparkles -->
+        <div class="sparkle">✨</div>
+        <div class="sparkle">⭐</div>
+        <div class="sparkle">💫</div>
+        <div class="sparkle">✨</div>
+        <div class="sparkle">⭐</div>
+        <div class="sparkle">💫</div>
+
+        <div class="content">
+            <!-- Compact Social Pills -->
+            <div class="social-compact">
+                <div class="social-pill pill-fb">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </div>
+                <div class="social-pill pill-ig">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </div>
+                <div class="social-pill pill-tw">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </div>
+                <div class="social-pill pill-li">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span>LinkedIn</span>
+                </div>
+                <div class="social-pill pill-yt">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </div>
+                <div class="social-pill pill-tk">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </div>
+            </div>
+
+            <!-- Mega Funnel -->
+            <div class="funnel-mega">
+                <div class="funnel-viz">
+                    <div class="funnel-layer layer-1">
+                        <div class="funnel-label">TRAFFIC</div>
+                        <div class="funnel-bar">
+                            <div class="funnel-number">10,000</div>
+                        </div>
+                        <div class="funnel-icon">🎯</div>
+                    </div>
+
+                    <div class="funnel-layer layer-2">
+                        <div class="funnel-label">LEADS</div>
+                        <div class="funnel-bar">
+                            <div class="funnel-number">5,000</div>
+                        </div>
+                        <div class="funnel-icon">🔥</div>
+                    </div>
+
+                    <div class="funnel-layer layer-3">
+                        <div class="funnel-label">SALES</div>
+                        <div class="funnel-bar">
+                            <div class="funnel-number">2,500</div>
+                        </div>
+                        <div class="funnel-icon">💰</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explosion Stats -->
+            <div class="explosion-stats">
+                <div class="explosion-box">
+                    <div class="explosion-icon">📈</div>
+                    <div class="explosion-value">250%</div>
+                    <div class="explosion-label">ROI Growth</div>
+                </div>
+                <div class="explosion-box">
+                    <div class="explosion-icon">🎯</div>
+                    <div class="explosion-value">82%</div>
+                    <div class="explosion-label">Conv Rate</div>
+                </div>
+                <div class="explosion-box">
+                    <div class="explosion-icon">💵</div>
+                    <div class="explosion-value">$125K</div>
+                    <div class="explosion-label">Revenue</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

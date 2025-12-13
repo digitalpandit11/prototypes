@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Engine - Choose Your Design</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 50px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .card-preview {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-preview iframe {
+            width: 1080px;
+            height: 1080px;
+            border: none;
+            transform: scale(0.37);
+            transform-origin: top left;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .features li {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .badge-new {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .badge-popular {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .badge-recommended {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 60px 0 30px;
+            text-align: center;
+        }
+
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            font-weight: 700;
+            color: #4ecdc4;
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .check {
+            color: #4ecdc4;
+            font-size: 18px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Choose Your Conversion Engine Design</h1>
+        <p class="subtitle">6 Modern Designs - All with Real Social Media Logos, Performance Metrics & Engaging Graphics</p>
+
+        <div class="grid">
+            <!-- Version 1: Success Stories -->
+            <div class="card" onclick="window.open('conversion-engine-with-people-v1.html', '_blank')">
+                <div class="card-preview">
+                    <iframe src="conversion-engine-with-people-v1.html" scrolling="no"></iframe>
+                </div>
+                <div class="card-content">
+                    <span class="badge badge-popular">POPULAR</span>
+                    <h3 class="card-title">Version 1: Success Stories</h3>
+                    <p class="card-description">Focused on team success and customer testimonials with purple/pink gradient.</p>
+                    <ul class="features">
+                        <li>Team member cards (CEO, Marketing, Designer, etc.)</li>
+                        <li>Customer testimonials with 5-star ratings</li>
+                        <li>Happy faces & celebration emojis 🎉😊🤩</li>
+                        <li>250% ROI growth highlight</li>
+                        <li>Purple/Pink gradient background</li>
+                    </ul>
+                    <a href="conversion-engine-with-people-v1.html" class="btn" target="_blank">View Full Design →</a>
+                </div>
+            </div>
+
+            <!-- Version 2: Customer Journey -->
+            <div class="card" onclick="window.open('conversion-engine-with-people-v2.html', '_blank')">
+                <div class="card-preview">
+                    <iframe src="conversion-engine-with-people-v2.html" scrolling="no"></iframe>
+                </div>
+                <div class="card-content">
+                    <span class="badge badge-recommended">RECOMMENDED</span>
+                    <h3 class="card-title">Version 2: Customer Journey</h3>
+                    <p class="card-description">Complete emotional journey from awareness to loyalty with teal/blue gradient.</p>
+                    <ul class="features">
+                        <li>5-step journey timeline with emotions 🤔🤓😍🤩🥳</li>
+                        <li>Emotion cards (happy customers, celebration)</li>
+                        <li>Customer reviews with facial expressions</li>
+                        <li>Team collaboration showcase</li>
+                        <li>Teal/Blue gradient background</li>
+                    </ul>
+                    <a href="conversion-engine-with-people-v2.html" class="btn" target="_blank">View Full Design →</a>
+                </div>
+            </div>
+
+            <!-- Version 3: Stock Photo Ready -->
+            <div class="card" onclick="window.open('conversion-engine-with-people-v3.html', '_blank')">
+                <div class="card-preview">
+                    <iframe src="conversion-engine-with-people-v3.html" scrolling="no"></iframe>
+                </div>
+                <div class="card-content">
+                    <span class="badge badge-new">CUSTOMIZABLE</span>
+                    <h3 class="card-title">Version 3: Stock Photo Ready</h3>
+                    <p class="card-description">Template with placeholders for real photos from Unsplash/Pexels.</p>
+                    <ul class="features">
+                        <li>Hero image placeholder for team photos</li>
+                        <li>Testimonial cards with CEO/CMO quotes</li>
+                        <li>Team avatars showing collaboration</li>
+                        <li>Easy to replace emojis with real photos</li>
+                        <li>Purple/Gold gradient background</li>
+                    </ul>
+                    <a href="conversion-engine-with-people-v3.html" class="btn" target="_blank">View Full Design →</a>
+                </div>
+            </div>
+
+            <!-- Original Engaging Version -->
+            <div class="card" onclick="window.open('conversion-engine-engaging.html', '_blank')">
+                <div class="card-preview">
+                    <iframe src="conversion-engine-engaging.html" scrolling="no"></iframe>
+                </div>
+                <div class="card-content">
+                    <span class="badge badge-popular">DATA-FOCUSED</span>
+                    <h3 class="card-title">Version 4: Performance Dashboard</h3>
+                    <p class="card-description">Heavy focus on metrics, analytics, and real-time performance data.</p>
+                    <ul class="features">
+                        <li>12 social media platform logos</li>
+                        <li>Real-time performance dashboard</li>
+                        <li>4 KPI cards with growth percentages</li>
+                        <li>8-week revenue chart with hover effects</li>
+                        <li>Dark blue/purple gradient background</li>
+                    </ul>
+                    <a href="conversion-engine-engaging.html" class="btn" target="_blank">View Full Design →</a>
+                </div>
+            </div>
+
+            <!-- Funnel Modern Version -->
+            <div class="card" onclick="window.open('conversion-funnel-modern.html', '_blank')">
+                <div class="card-preview">
+                    <iframe src="conversion-funnel-modern.html" scrolling="no"></iframe>
+                </div>
+                <div class="card-content">
+                    <span class="badge badge-new">FUNNEL-FOCUSED</span>
+                    <h3 class="card-title">Version 5: Glowing Funnel</h3>
+                    <p class="card-description">Beautiful glowing funnel with floating icons and dark background.</p>
+                    <ul class="features">
+                        <li>Animated floating icon bubbles</li>
+                        <li>Glowing conversion funnel centerpiece</li>
+                        <li>Analytics dashboard at bottom</li>
+                        <li>Sparkle effects and animations ✨</li>
+                        <li>Dark gradient background</li>
+                    </ul>
+                    <a href="conversion-funnel-modern.html" class="btn" target="_blank">View Full Design →</a>
+                </div>
+            </div>
+
+            <!-- First Modern Version -->
+            <div class="card" onclick="window.open('conversion-engine-post.html', '_blank')">
+                <div class="card-preview">
+                    <iframe src="conversion-engine-post.html" scrolling="no"></iframe>
+                </div>
+                <div class="card-content">
+                    <span class="badge badge-new">MINIMAL</span>
+                    <h3 class="card-title">Version 6: Clean & Modern</h3>
+                    <p class="card-description">Minimal design with glassmorphic UI and vibrant gradients.</p>
+                    <ul class="features">
+                        <li>8 icon grid with glassmorphic cards</li>
+                        <li>Floating stats bar at bottom</li>
+                        <li>Clean typography and spacing</li>
+                        <li>Smooth animations and hover effects</li>
+                        <li>Purple to pink gradient</li>
+                    </ul>
+                    <a href="conversion-engine-post.html" class="btn" target="_blank">View Full Design →</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">📊 Quick Comparison</h2>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>V1: Success</th>
+                        <th>V2: Journey</th>
+                        <th>V3: Photos</th>
+                        <th>V4: Dashboard</th>
+                        <th>V5: Funnel</th>
+                        <th>V6: Clean</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Social Media Logos</strong></td>
+                        <td class="check">✓ (6)</td>
+                        <td class="check">✓ (12)</td>
+                        <td class="check">✓ (12)</td>
+                        <td class="check">✓ (12)</td>
+                        <td class="check">✓ (8)</td>
+                        <td class="check">✓ (8)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Human Faces/Emotions</strong></td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conversion Funnel</strong></td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance Metrics</strong></td>
+                        <td class="check">✓✓</td>
+                        <td class="check">✓✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer Testimonials</strong></td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer Journey</strong></td>
+                        <td>—</td>
+                        <td class="check">✓✓✓</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Growth Charts</strong></td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Animations</strong></td>
+                        <td class="check">✓✓</td>
+                        <td class="check">✓✓</td>
+                        <td class="check">✓✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓✓✓</td>
+                        <td class="check">✓✓</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best For</strong></td>
+                        <td>Team Success</td>
+                        <td>Storytelling</td>
+                        <td>Custom Photos</td>
+                        <td>Data/Metrics</td>
+                        <td>Funnel Focus</td>
+                        <td>Minimal Look</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>💡 <strong>Pro Tip:</strong> Click on any card to view the full design in a new tab</p>
+            <p style="margin-top: 10px;">All designs are 1080x1080px - perfect for Instagram, LinkedIn, and Facebook posts</p>
+        </div>
+    </div>
+
+    <script>
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '1' && e.key <= '6') {
+                const cards = document.querySelectorAll('.card');
+                const index = parseInt(e.key) - 1;
+                if (cards[index]) {
+                    cards[index].click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

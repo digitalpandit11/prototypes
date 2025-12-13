@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Engine - Version 2 (Customer Journey)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .canvas {
+            width: 1080px;
+            height: 1080px;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+        }
+
+        .orb1 { width: 600px; height: 600px; background: #ff6b6b; top: -200px; right: -200px; }
+        .orb2 { width: 500px; height: 500px; background: #4ecdc4; bottom: -150px; left: -150px; }
+        .orb3 { width: 400px; height: 400px; background: #a8dadc; top: 40%; left: 40%; }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, #4ecdc4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 26px;
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+
+        /* Customer Journey Timeline */
+        .journey-section {
+            margin-bottom: 20px;
+        }
+
+        .journey-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #4ecdc4;
+            text-align: center;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .journey-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .journey-step {
+            flex: 1;
+            text-align: center;
+        }
+
+        .step-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s;
+        }
+
+        .step-avatar:hover {
+            transform: scale(1.1) translateY(-5px);
+            border-color: #4ecdc4;
+            box-shadow: 0 15px 40px rgba(78, 205, 196, 0.5);
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .arrow-connector {
+            font-size: 32px;
+            color: #4ecdc4;
+            margin-top: 30px;
+        }
+
+        /* Social Media Grid */
+        .social-section {
+            margin-bottom: 20px;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+
+        .social-icon {
+            aspect-ratio: 1;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .social-icon:hover::after {
+            opacity: 1;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .facebook { background: linear-gradient(135deg, #1877f2 0%, #0d5dbf 100%); }
+        .instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+        .twitter { background: linear-gradient(135deg, #1DA1F2 0%, #0d8bd9 100%); }
+        .linkedin { background: linear-gradient(135deg, #0077b5 0%, #005582 100%); }
+        .youtube { background: linear-gradient(135deg, #FF0000 0%, #cc0000 100%); }
+        .tiktok { background: linear-gradient(135deg, #000000 0%, #ee1d52 50%, #69c9d0 100%); }
+        .email { background: linear-gradient(135deg, #EA4335 0%, #c5341e 100%); }
+        .whatsapp { background: linear-gradient(135deg, #25D366 0%, #1da851 100%); }
+        .pinterest { background: linear-gradient(135deg, #E60023 0%, #bd001c 100%); }
+        .snapchat { background: linear-gradient(135deg, #FFFC00 0%, #ffe600 100%); }
+        .telegram { background: linear-gradient(135deg, #0088cc 0%, #006699 100%); }
+        .google { background: linear-gradient(135deg, #4285f4 0%, #ea4335 50%, #fbbc05 75%, #34a853 100%); }
+
+        .snapchat i { color: #000; }
+
+        /* Funnel Section */
+        .funnel-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .funnel-container {
+            flex: 1;
+        }
+
+        .funnel-3d {
+            position: relative;
+            height: 200px;
+        }
+
+        .funnel-level {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(78, 205, 196, 0.2);
+            backdrop-filter: blur(10px);
+            border: 3px solid;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            transition: all 0.3s;
+        }
+
+        .funnel-level:hover {
+            transform: translateX(-50%) scale(1.05);
+            background: rgba(78, 205, 196, 0.3);
+        }
+
+        .level-1 {
+            top: 0;
+            width: 100%;
+            height: 55px;
+            border-color: #4ecdc4;
+        }
+
+        .level-2 {
+            top: 70px;
+            width: 70%;
+            height: 55px;
+            border-color: #a8dadc;
+        }
+
+        .level-3 {
+            top: 140px;
+            width: 45%;
+            height: 55px;
+            border-color: #ff6b6b;
+        }
+
+        .level-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .level-num {
+            font-size: 26px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .emotion-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .emotion-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .emotion-card:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .emotion-face {
+            font-size: 52px;
+        }
+
+        .emotion-content {
+            flex: 1;
+        }
+
+        .emotion-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .emotion-subtitle {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Performance Dashboard */
+        .performance {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 25px;
+        }
+
+        .perf-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .perf-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .happy-team {
+            display: flex;
+            gap: 8px;
+        }
+
+        .team-member {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4ecdc4, #ff6b6b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .metric-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .metric-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #4ecdc4 0%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .metric-trend {
+            font-size: 12px;
+            color: #4ecdc4;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        /* Reviews */
+        .reviews-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .review-stars {
+            color: #ffd93d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+        }
+
+        /* Chart */
+        .chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 80px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(180deg, #4ecdc4 0%, #a8dadc 100%);
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .chart-bar:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(78, 205, 196, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas">
+        <div class="glow-orb orb1"></div>
+        <div class="glow-orb orb2"></div>
+        <div class="glow-orb orb3"></div>
+
+        <div class="content">
+            <!-- Header -->
+            <div class="header">
+                <h1>Let's Build a Conversion Engine</h1>
+                <p class="subtitle">Not Just Campaigns.</p>
+            </div>
+
+            <!-- Customer Journey -->
+            <div class="journey-section">
+                <div class="journey-title">Customer Journey</div>
+                <div class="journey-timeline">
+                    <div class="journey-step">
+                        <div class="step-avatar">🤔</div>
+                        <div class="step-label">Awareness</div>
+                        <div class="step-desc">First Contact</div>
+                    </div>
+                    <div class="arrow-connector">→</div>
+                    <div class="journey-step">
+                        <div class="step-avatar">🤓</div>
+                        <div class="step-label">Interest</div>
+                        <div class="step-desc">Engagement</div>
+                    </div>
+                    <div class="arrow-connector">→</div>
+                    <div class="journey-step">
+                        <div class="step-avatar">😍</div>
+                        <div class="step-label">Decision</div>
+                        <div class="step-desc">Consideration</div>
+                    </div>
+                    <div class="arrow-connector">→</div>
+                    <div class="journey-step">
+                        <div class="step-avatar">🤩</div>
+                        <div class="step-label">Action</div>
+                        <div class="step-desc">Purchase</div>
+                    </div>
+                    <div class="arrow-connector">→</div>
+                    <div class="journey-step">
+                        <div class="step-avatar">🥳</div>
+                        <div class="step-label">Loyalty</div>
+                        <div class="step-desc">Repeat Customer</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="social-section">
+                <div class="social-grid">
+                    <div class="social-icon facebook"><i class="fab fa-facebook-f"></i></div>
+                    <div class="social-icon instagram"><i class="fab fa-instagram"></i></div>
+                    <div class="social-icon twitter"><i class="fab fa-twitter"></i></div>
+                    <div class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></div>
+                    <div class="social-icon youtube"><i class="fab fa-youtube"></i></div>
+                    <div class="social-icon tiktok"><i class="fab fa-tiktok"></i></div>
+                    <div class="social-icon email"><i class="fas fa-envelope"></i></div>
+                    <div class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
+                    <div class="social-icon pinterest"><i class="fab fa-pinterest-p"></i></div>
+                    <div class="social-icon snapchat"><i class="fab fa-snapchat-ghost"></i></div>
+                    <div class="social-icon telegram"><i class="fab fa-telegram-plane"></i></div>
+                    <div class="social-icon google"><i class="fab fa-google"></i></div>
+                </div>
+            </div>
+
+            <!-- Funnel with Emotions -->
+            <div class="funnel-section">
+                <div class="funnel-container">
+                    <div class="funnel-3d">
+                        <div class="funnel-level level-1">
+                            <span class="level-text">Traffic</span>
+                            <span class="level-num">10K</span>
+                        </div>
+                        <div class="funnel-level level-2">
+                            <span class="level-text">Leads</span>
+                            <span class="level-num">5K</span>
+                        </div>
+                        <div class="funnel-level level-3">
+                            <span class="level-text">Sales</span>
+                            <span class="level-num">2.5K</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="emotion-section">
+                    <div class="emotion-card">
+                        <div class="emotion-face">😊</div>
+                        <div class="emotion-content">
+                            <div class="emotion-title">Happy Customers</div>
+                            <div class="emotion-subtitle">98% Satisfaction Rate</div>
+                        </div>
+                    </div>
+                    <div class="emotion-card">
+                        <div class="emotion-face">🎉</div>
+                        <div class="emotion-content">
+                            <div class="emotion-title">Celebrating Success</div>
+                            <div class="emotion-subtitle">250% Growth This Year</div>
+                        </div>
+                    </div>
+                    <div class="emotion-card">
+                        <div class="emotion-face">💪</div>
+                        <div class="emotion-content">
+                            <div class="emotion-title">Strong Results</div>
+                            <div class="emotion-subtitle">Industry Leading ROI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance -->
+            <div class="performance">
+                <div class="perf-header">
+                    <div class="perf-title">
+                        <i class="fas fa-trophy"></i>
+                        Performance Metrics
+                    </div>
+                    <div class="happy-team">
+                        <div class="team-member">😄</div>
+                        <div class="team-member">🤗</div>
+                        <div class="team-member">😎</div>
+                    </div>
+                </div>
+
+                <!-- Reviews -->
+                <div class="reviews-section">
+                    <div class="review-card">
+                        <div class="reviewer-avatar">😃</div>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <div class="review-text">"Our revenue increased 3x in just 6 months!"</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-avatar">🤩</div>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <div class="review-text">"Best marketing decision we ever made!"</div>
+                    </div>
+                    <div class="review-card">
+                        <div class="reviewer-avatar">😍</div>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                        <div class="review-text">"Incredible ROI and amazing support team!"</div>
+                    </div>
+                </div>
+
+                <!-- Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-icon">🎯</div>
+                        <div class="metric-value">82%</div>
+                        <div class="metric-label">Conversion</div>
+                        <div class="metric-trend">↑ +15%</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-icon">💵</div>
+                        <div class="metric-value">$125K</div>
+                        <div class="metric-label">Revenue</div>
+                        <div class="metric-trend">↑ +67%</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-icon">👥</div>
+                        <div class="metric-value">5.2K</div>
+                        <div class="metric-label">Leads</div>
+                        <div class="metric-trend">↑ +34%</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-icon">🚀</div>
+                        <div class="metric-value">250%</div>
+                        <div class="metric-label">ROI</div>
+                        <div class="metric-trend">↑ +45%</div>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="chart">
+                    <div class="chart-bar" style="height: 45%;"></div>
+                    <div class="chart-bar" style="height: 60%;"></div>
+                    <div class="chart-bar" style="height: 75%;"></div>
+                    <div class="chart-bar" style="height: 55%;"></div>
+                    <div class="chart-bar" style="height: 85%;"></div>
+                    <div class="chart-bar" style="height: 70%;"></div>
+                    <div class="chart-bar" style="height: 90%;"></div>
+                    <div class="chart-bar" style="height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
