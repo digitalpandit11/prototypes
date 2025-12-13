@@ -1,0 +1,157 @@
+Category,Feature,Phase 1 (MVP),Phase 2 (Enhanced),Phase 3 (Advanced),Priority,Justification
+PAGES - PUBLIC,Landing Page,index.html,,,P0,First touchpoint - marketing & info
+PAGES - PUBLIC,Student Login,student-login.html,,,P0,Authentication required before any action
+PAGES - PUBLIC,Admin Login,admin-login.html,,,P0,Admin access essential for operations
+
+PAGES - STUDENT CORE,Student Dashboard,student-dashboard.html,,,P0,Central hub - must have immediately
+PAGES - STUDENT CORE,Browse Courses,student-courses.html,,,P0,Course discovery is core value prop
+PAGES - STUDENT CORE,View Mentors,student-mentors.html,,,P0,Mentor selection drives bookings
+PAGES - STUDENT CORE,Book Session,student-booking.html,,,P0,Revenue generation starts here
+PAGES - STUDENT CORE,Checkout & Payment,student-checkout.html,,,P0,Cannot operate without payment processing
+PAGES - STUDENT CORE,Session History,student-sessions.html,,,P0,Students need to see upcoming/past sessions
+
+PAGES - STUDENT ENHANCED,Recorded Sessions,,student-recordings.html,,P1,Value-add for students who miss live sessions
+PAGES - STUDENT ENHANCED,Payments & Purchases,,payments-purchases.html,,P1,Transparency builds trust & reduces support queries
+PAGES - STUDENT ENHANCED,My Queries,,student-queries.html,,P1,Self-service support reduces admin load
+PAGES - STUDENT ENHANCED,My Certificates,,student-certificates.html,,P1,Completion incentive & credential proof
+
+PAGES - STUDENT ADVANCED,My Assignments,,,student-assignments.html*,P2,Educational depth - not critical for operations
+PAGES - STUDENT ADVANCED,My Projects,,,student-projects.html*,P2,Academic rigor - can operate without initially
+
+PAGES - ADMIN CORE,Admin Dashboard,admin-dashboard.html,,,P0,Admin central command center
+PAGES - ADMIN CORE,Student Management,admin-students.html,,,P0,Must manage users from day 1
+PAGES - ADMIN CORE,Mentor Management,admin-mentors.html,,,P0,Cannot schedule without mentor management
+PAGES - ADMIN CORE,Session Management,admin-sessions.html,,,P0,Core service delivery mechanism
+PAGES - ADMIN CORE,Course Management,admin-courses.html,,,P0,Cannot sell what you don't manage
+PAGES - ADMIN CORE,Payment Management,admin-payments.html,,,P0,Financial tracking essential
+
+PAGES - ADMIN ENHANCED,Workshop Management,,admin-workshops.html,,P1,Revenue scaling through group sessions
+PAGES - ADMIN ENHANCED,Recording Management,,admin-recordings.html,,P1,Content becomes reusable asset
+PAGES - ADMIN ENHANCED,Query Management,,admin-queries.html,,P1,Centralized support improves efficiency
+PAGES - ADMIN ENHANCED,Certificate Management,,admin-certificates.html,,P1,Automate credential issuance
+PAGES - ADMIN ENHANCED,Google Meet Settings,,admin-meet-settings.html,,P1,Integration improves automation
+
+PAGES - ADMIN ADVANCED,Assignment Management,,,admin-assignments.html,P2,Complex grading workflows - build later
+PAGES - ADMIN ADVANCED,Project Management,,,admin-projects.html,P2,Evaluation systems require maturity
+PAGES - ADMIN ADVANCED,Reports & Analytics,,,admin-reports.html,P2,Needs historical data to be meaningful
+
+FEATURES - Authentication,Student Login & Register,✅,,,P0,Security foundation
+FEATURES - Authentication,Admin Login & Register,✅,,,P0,Security foundation
+FEATURES - Authentication,Session Management,✅,,,P0,Keep users logged in
+
+FEATURES - Course Management,Browse Course Catalog,✅,,,P0,Core discovery mechanism
+FEATURES - Course Management,View Course Details,✅,,,P0,Students need full information
+FEATURES - Course Management,Course Categories/Filtering,✅,,,P0,Improve discoverability
+FEATURES - Course Management,Add/Edit/Delete Courses,✅,,,P0,Admin must manage inventory
+FEATURES - Course Management,Upload Syllabus,,✅,,P1,Improves course transparency
+
+FEATURES - Booking,Select Mentor,✅,,,P0,Personalization drives conversion
+FEATURES - Booking,Choose Date/Time,✅,,,P0,Scheduling flexibility required
+FEATURES - Booking,Session Confirmation,✅,,,P0,Confirmation reduces no-shows
+FEATURES - Booking,Calendar Integration,,✅,,P1,Convenience feature
+
+FEATURES - Payments,Credit Card Processing,✅,,,P0,Primary payment method
+FEATURES - Payments,UPI/Net Banking,✅,,,P0,Indian market requirement
+FEATURES - Payments,Credit System,✅,,,P0,Flexible pricing model
+FEATURES - Payments,Purchase History,,✅,,P1,Transparency & trust building
+FEATURES - Payments,Refund Processing,,✅,,P1,Customer service requirement
+
+FEATURES - Sessions,View Scheduled Sessions,✅,,,P0,Students track commitments
+FEATURES - Sessions,Join Session Link,✅,,,P0,Access to actual service
+FEATURES - Sessions,Session Status Tracking,✅,,,P0,Clear communication
+FEATURES - Sessions,Reschedule Session,,✅,,P1,Flexibility improves satisfaction
+FEATURES - Sessions,Cancel Session,,✅,,P1,Student convenience
+
+FEATURES - Recordings,Upload Recordings,,✅,,P1,Create content library
+FEATURES - Recordings,View Recordings,,✅,,P1,On-demand learning value
+FEATURES - Recordings,Download Recordings,,✅,,P1,Offline access convenience
+FEATURES - Recordings,Search/Filter Recordings,,✅,,P1,Content discoverability
+
+FEATURES - Support,Submit Query,,✅,,P1,Student self-service
+FEATURES - Support,Query Categories,,✅,,P1,Organized support system
+FEATURES - Support,Track Query Status,,✅,,P1,Transparency reduces follow-ups
+FEATURES - Support,Admin Response System,,✅,,P1,Efficient support workflow
+
+FEATURES - Certificates,View Earned Certificates,,✅,,P1,Credential proof
+FEATURES - Certificates,Download PDF,,✅,,P1,Shareable credential
+FEATURES - Certificates,Share on Social Media,,✅,,P1,Marketing through students
+FEATURES - Certificates,Issue Certificates,,✅,,P1,Admin workflow automation
+FEATURES - Certificates,Bulk Certificate Generation,,✅,,P1,Operational efficiency
+FEATURES - Certificates,Certificate Verification,,,✅,P2,Authenticity checking
+
+FEATURES - Workshops,Create Workshop,,✅,,P1,Group session capability
+FEATURES - Workshops,Manage Enrollments,,✅,,P1,Track participants
+FEATURES - Workshops,Workshop Recordings,,✅,,P1,Reusable content
+
+FEATURES - Assignments,Create Assignments,,,✅,P2,Academic assessment tool
+FEATURES - Assignments,Submit Assignments,,,✅,P2,Student submission workflow
+FEATURES - Assignments,Grade Assignments,,,✅,P2,Evaluation system
+FEATURES - Assignments,Assignment Feedback,,,✅,P2,Learning improvement
+
+FEATURES - Projects,Create Projects,,,✅,P2,Capstone requirement
+FEATURES - Projects,Submit Projects,,,✅,P2,Portfolio building
+FEATURES - Projects,Review Projects,,,✅,P2,Mentor evaluation
+FEATURES - Projects,Project Grading,,,✅,P2,Performance measurement
+
+FEATURES - Analytics,Basic Dashboard Stats,✅,,,P0,High-level overview
+FEATURES - Analytics,Session Statistics,✅,,,P0,Operational metrics
+FEATURES - Analytics,Revenue Tracking,✅,,,P0,Financial health
+FEATURES - Analytics,Student Performance Reports,,,✅,P2,Data-driven insights require history
+FEATURES - Analytics,Mentor Performance Reports,,,✅,P2,Quality measurement
+FEATURES - Analytics,Course Popularity Analytics,,,✅,P2,Strategic planning data
+FEATURES - Analytics,Export Reports (PDF/Excel),,,✅,P2,Stakeholder reporting
+
+FEATURES - User Management,Add/Edit/Delete Students,✅,,,P0,Basic CRUD operations
+FEATURES - User Management,Add/Edit/Delete Mentors,✅,,,P0,Basic CRUD operations
+FEATURES - User Management,User Roles & Permissions,✅,,,P0,Security requirement
+FEATURES - User Management,Bulk User Import,,✅,,P1,Operational efficiency
+
+FEATURES - Integration,Google Meet API,,✅,,P1,Automated session creation
+FEATURES - Integration,Payment Gateway API,✅,,,P0,Revenue collection
+FEATURES - Integration,Email Notifications,✅,,,P0,Communication essential
+FEATURES - Integration,SMS Notifications,,✅,,P1,Better engagement
+
+TECHNICAL - Backend,User Authentication API,✅,,,P0,Security foundation
+TECHNICAL - Backend,Course CRUD APIs,✅,,,P0,Data management
+TECHNICAL - Backend,Booking APIs,✅,,,P0,Core functionality
+TECHNICAL - Backend,Payment APIs,✅,,,P0,Revenue processing
+TECHNICAL - Backend,Session Management APIs,✅,,,P0,Service delivery
+TECHNICAL - Backend,Recording APIs,,✅,,P1,Content delivery
+TECHNICAL - Backend,Analytics APIs,,,✅,P2,Reporting system
+
+TECHNICAL - Database,User Tables,✅,,,P0,Store user data
+TECHNICAL - Database,Course Tables,✅,,,P0,Store course catalog
+TECHNICAL - Database,Session Tables,✅,,,P0,Store bookings
+TECHNICAL - Database,Payment Tables,✅,,,P0,Transaction records
+TECHNICAL - Database,Recording Tables,,✅,,P1,Media management
+TECHNICAL - Database,Assignment Tables,,,✅,P2,Academic data
+
+TECHNICAL - Security,SSL/HTTPS,✅,,,P0,Data protection
+TECHNICAL - Security,Password Hashing,✅,,,P0,Account security
+TECHNICAL - Security,JWT Tokens,✅,,,P0,Session management
+TECHNICAL - Security,PCI Compliance,✅,,,P0,Payment security
+TECHNICAL - Security,Data Encryption,,✅,,P1,Enhanced privacy
+TECHNICAL - Security,2FA Authentication,,,✅,P2,Advanced security
+
+SUCCESS METRICS - Phase 1,Students Registered,50+ students,,,P0,User acquisition target
+SUCCESS METRICS - Phase 1,Sessions Booked,100+ sessions,,,P0,Engagement metric
+SUCCESS METRICS - Phase 1,Revenue Generated,$10000,,,P0,Business viability
+SUCCESS METRICS - Phase 1,System Uptime,99%+,,,P0,Reliability target
+SUCCESS METRICS - Phase 1,Payment Success Rate,98%+,,,P0,Transaction reliability
+
+SUCCESS METRICS - Phase 2,Active Students,,200+ students,,P1,Growth target
+SUCCESS METRICS - Phase 2,Query Resolution,,90% within 24hrs,,P1,Support efficiency
+SUCCESS METRICS - Phase 2,Recording Views,,500+ views,,P1,Content engagement
+SUCCESS METRICS - Phase 2,Certificates Issued,,100+ certificates,,P1,Completion rate
+SUCCESS METRICS - Phase 2,Student Satisfaction,,4.5/5 rating,,P1,Quality metric
+
+SUCCESS METRICS - Phase 3,Total Students,,,500+ students,P2,Scale target
+SUCCESS METRICS - Phase 3,Courses with Assignments,,,50+ courses,P2,Academic depth
+SUCCESS METRICS - Phase 3,Monthly Reports,,,Generated automatically,P2,Analytics maturity
+SUCCESS METRICS - Phase 3,Course Completion,,,95% completion,P2,Quality outcome
+SUCCESS METRICS - Phase 3,Enterprise Clients,,,5+ clients,P2,B2B expansion
+
+TIMELINE,Phase 1 Duration,8 weeks,,,P0,MVP launch timeline
+TIMELINE,Phase 2 Duration,,8 weeks,,P1,Enhancement timeline
+TIMELINE,Phase 3 Duration,,,8 weeks,P2,Advanced features timeline
+TIMELINE,Total Project Duration,24 weeks (6 months),,,P0,Complete platform launch
