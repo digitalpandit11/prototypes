@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radical Technologies - Landing Pages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #718096;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .landing-pages {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 25px;
+            background: #f7fafc;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #2d3748;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .page-link:hover {
+            background: #edf2f7;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .page-info {
+            flex: 1;
+        }
+
+        .page-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .page-desc {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        .page-status {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-ready {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status-wip {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+
+        .arrow {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-left: 20px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #718096;
+            font-size: 0.9rem;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .page-link {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .arrow {
+                align-self: flex-end;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Radical Technologies</h1>
+        <p class="subtitle">Landing Pages Directory</p>
+
+        <div class="landing-pages">
+            <!-- Platform Engineer Landing Page -->
+            <a href="platform-engineer-landing.html" class="page-link">
+                <div class="page-info">
+                    <div class="page-title">Platform Engineer Master Program</div>
+                    <div class="page-desc">
+                        16-course comprehensive DevOps & Cloud training program | 6 months | ₹12-30L salary potential
+                    </div>
+                </div>
+                <span class="page-status status-ready">Ready for Review</span>
+                <span class="arrow">→</span>
+            </a>
+
+            <!-- Placeholder for future landing pages -->
+            <a href="#" class="page-link" style="opacity: 0.5; pointer-events: none;">
+                <div class="page-info">
+                    <div class="page-title">More Landing Pages Coming Soon...</div>
+                    <div class="page-desc">
+                        Additional course landing pages will be added here
+                    </div>
+                </div>
+                <span class="page-status status-wip">Coming Soon</span>
+                <span class="arrow">→</span>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>
+                <strong>Radical Technologies</strong><br>
+                📧 <a href="mailto:training@radicaltechnologies.co.in">training@radicaltechnologies.co.in</a> |
+                📱 8055223360 |
+                🌐 <a href="http://radicaltechnologies.co.in" target="_blank">radicaltechnologies.co.in</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join Radical Technologies' Platform Engineer Master Program. 16 courses in DevOps, Cloud, AWS, Azure, Kubernetes, MLOps. 92% placement rate. ₹12-30L salary potential. 850+ hiring partners.">
+    <title>Platform Engineer Master Program - Radical Technologies | Transform Your Career in 6 Months</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero .subheadline {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .hero .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            font-size: 1rem;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #2d3748;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: #f7fafc;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .problem-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .problem-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .problem-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .problem-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Solution Section */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .solution-card {
+            background: #f7fafc;
+            padding: 30px;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .solution-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .solution-card h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* Learning Path */
+        .learning-path {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .learning-path .section-title {
+            color: white;
+        }
+
+        .path-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .path-stage {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border-left: 5px solid white;
+        }
+
+        .path-stage h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .path-stage ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 15px 0;
+        }
+
+        .path-stage li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .path-stage li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+        }
+
+        .path-stage .outcome {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .path-stage .salary {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        /* Outcomes Section */
+        .outcomes {
+            background: #f7fafc;
+        }
+
+        .roi-calculator {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .success-stories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .success-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .success-card .photo-placeholder {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .success-card h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .success-card .before-after {
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        .success-card .before {
+            color: #e53e3e;
+        }
+
+        .success-card .after {
+            color: #38a169;
+            font-weight: bold;
+        }
+
+        .stats-bar {
+            background: #667eea;
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        /* Curriculum Section */
+        .curriculum-accordion {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .course-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .course-header {
+            padding: 20px;
+            background: #f7fafc;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-header:hover {
+            background: #edf2f7;
+        }
+
+        .course-header h3 {
+            color: #2d3748;
+            font-size: 1.2rem;
+        }
+
+        .course-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+
+        .course-content.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .course-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .course-detail-item {
+            padding: 10px;
+            background: #f7fafc;
+            border-radius: 6px;
+        }
+
+        .course-detail-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Trust Section */
+        .trust {
+            background: #f7fafc;
+        }
+
+        .instructor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .instructor-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .instructor-photo-placeholder {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .guarantee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .guarantee-item {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .guarantee-item .check {
+            color: #38a169;
+            font-size: 1.5rem;
+        }
+
+        .partner-logos {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .partner-logos h3 {
+            margin-bottom: 30px;
+            color: #2d3748;
+        }
+
+        .logo-placeholder {
+            display: inline-block;
+            margin: 15px;
+            padding: 20px 40px;
+            background: #f7fafc;
+            border-radius: 8px;
+            color: #718096;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .urgency-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px auto;
+            max-width: 500px;
+        }
+
+        .urgency-box p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subheadline {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hero .trust-badges {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+            }
+        }
+
+        .placeholder-note {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero">
+        <div class="container">
+            <h1>From Career Uncertainty to ₹12-30L DevOps Engineer in 6 Months</h1>
+            <p class="subheadline">India's Most Comprehensive Platform Engineer Master Program</p>
+            <p class="subheadline">16 Industry-Aligned Courses | Multi-Cloud | MLOps | 850+ Hiring Partners</p>
+            <p style="margin-top: 10px; font-size: 1rem; opacity: 0.9;">By Radical Technologies</p>
+
+            <div class="trust-badges">
+                <div class="trust-badge">🎓 16 Courses</div>
+                <div class="trust-badge">☁️ AWS + Azure + GCP</div>
+                <div class="trust-badge">🤝 850+ Hiring Partners</div>
+                <div class="trust-badge">📈 92% Placement Rate</div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Calculate Your Salary Potential</a>
+                <a href="#curriculum" class="btn btn-secondary">View Complete Curriculum</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: THE PROBLEM -->
+    <section class="problem">
+        <div class="container">
+            <h2 class="section-title">The DevOps Skills Gap is Creating Historic Career Opportunities</h2>
+
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>The Challenge</h3>
+                    <ul>
+                        <li>90% of enterprises migrating to cloud</li>
+                        <li>Skilled Platform Engineers are scarce</li>
+                        <li>Traditional IT roles being automated</li>
+                        <li>Fragmented learning paths everywhere</li>
+                    </ul>
+                </div>
+
+                <div class="problem-card">
+                    <h3>The Opportunity</h3>
+                    <ul>
+                        <li>100,000+ DevOps jobs open in India</li>
+                        <li>Average salary: ₹12-30L annually</li>
+                        <li>75% growth in demand year-over-year</li>
+                        <li>Future-proof career path</li>
+                    </ul>
+                </div>
+
+                <div class="problem-card">
+                    <h3>The Gap</h3>
+                    <ul>
+                        <li>Most courses teach tools, not job roles</li>
+                        <li>No real-world project experience</li>
+                        <li>No placement support</li>
+                        <li>Missing enterprise context</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: THE SOLUTION -->
+    <section class="solution">
+        <div class="container">
+            <h2 class="section-title">Why This Master Program Gets You Hired</h2>
+
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <div class="icon">🎯</div>
+                    <h3>Job-Role Focused (Not Tool-Focused)</h3>
+                    <p>Every module maps to specific job roles: Cloud Engineer, DevOps Engineer, Platform Engineer, SRE, MLOps Engineer. You graduate job-ready, not just exam-ready.</p>
+                </div>
+
+                <div class="solution-card">
+                    <div class="icon">🏗️</div>
+                    <h3>Real Enterprise Projects</h3>
+                    <p>Build 5 capstone projects: Multi-cloud deployments, CI/CD pipelines, Kubernetes clusters, SRE monitoring, MLOps platforms. Portfolio-ready work that employers want to see.</p>
+                </div>
+
+                <div class="solution-card">
+                    <div class="icon">📊</div>
+                    <h3>Gartner-Recognized Tech Stack</h3>
+                    <p>Learn industry-leading platforms: AWS, Azure, GCP, Kubernetes, Terraform, Nutanix—technologies enterprises actually use. Aligned with Gartner Magic Quadrants.</p>
+                </div>
+
+                <div class="solution-card">
+                    <div class="icon">🤝</div>
+                    <h3>Career Transformation Support</h3>
+                    <p>Resume optimization, GitHub branding, mock interviews, salary negotiation, 850+ hiring partner network. Placement support until you're hired.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: LEARNING PATH -->
+    <section class="learning-path">
+        <div class="container">
+            <h2 class="section-title">Your 6-Month Transformation Journey</h2>
+
+            <div class="path-timeline">
+                <div class="path-stage">
+                    <h3>MONTH 1-2: 🧱 FOUNDATION LAYER</h3>
+                    <ul>
+                        <li>Red Hat Linux Administration</li>
+                        <li>Networking Fundamentals</li>
+                        <li>Windows Server Administration</li>
+                        <li>ITIL 4.0 (IT Operations mindset)</li>
+                    </ul>
+                    <div class="outcome">
+                        <p><strong>✓ You'll qualify for:</strong> System Administrator | IT Support Engineer | NOC Engineer</p>
+                        <p class="salary">💰 Entry salary: ₹3-6 LPA</p>
+                    </div>
+                </div>
+
+                <div class="path-stage">
+                    <h3>MONTH 2-3: ☁️ CLOUD CORE LAYER</h3>
+                    <ul>
+                        <li>AWS Cloud (Practitioner → Associate level)</li>
+                        <li>Azure Administration (AZ-900 + AZ-104)</li>
+                        <li>Google Cloud Platform (GCA)</li>
+                        <li>VMware Virtualization</li>
+                        <li>Nutanix HCI</li>
+                    </ul>
+                    <div class="outcome">
+                        <p><strong>✓ You'll qualify for:</strong> Cloud Administrator | Infrastructure Engineer | Virtualization Engineer</p>
+                        <p class="salary">💰 Mid-level salary: ₹6-15 LPA</p>
+                    </div>
+                </div>
+
+                <div class="path-stage">
+                    <h3>MONTH 3-4: 🚀 DEVOPS & PLATFORM LAYER</h3>
+                    <ul>
+                        <li>DevOps (CI/CD, SCM, Automation)</li>
+                        <li>Docker & Kubernetes</li>
+                        <li>Terraform (Infrastructure as Code)</li>
+                        <li>Azure DevOps</li>
+                    </ul>
+                    <div class="outcome">
+                        <p><strong>✓ You'll qualify for:</strong> DevOps Engineer | Kubernetes Admin | Platform Engineer</p>
+                        <p class="salary">💰 Senior salary: ₹15-30 LPA</p>
+                    </div>
+                </div>
+
+                <div class="path-stage">
+                    <h3>MONTH 5: ⚡ RELIABILITY & AUTOMATION LAYER</h3>
+                    <ul>
+                        <li>Site Reliability Engineering (SRE)</li>
+                        <li>Python for DevOps & MLOps</li>
+                    </ul>
+                    <div class="outcome">
+                        <p><strong>✓ You'll qualify for:</strong> Site Reliability Engineer | Automation Engineer</p>
+                        <p class="salary">💰 Specialist salary: ₹10-22 LPA</p>
+                    </div>
+                </div>
+
+                <div class="path-stage">
+                    <h3>MONTH 6: 🤖 AI & MLOPS LAYER + CAPSTONE</h3>
+                    <ul>
+                        <li>Full-Stack MLOps</li>
+                        <li>5 Integrated Capstone Projects</li>
+                        <li>Interview Preparation + Placement</li>
+                    </ul>
+                    <div class="outcome">
+                        <p><strong>✓ You'll qualify for:</strong> MLOps Engineer | AI Platform Engineer</p>
+                        <p class="salary">💰 Future-ready salary: ₹20-40 LPA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: OUTCOMES & ROI -->
+    <section class="outcomes">
+        <div class="container">
+            <h2 class="section-title">Your Investment, Your Returns</h2>
+
+            <div class="roi-calculator">
+                <h3 style="text-align: center; margin-bottom: 20px; color: #667eea;">ROI Calculator</h3>
+                <div class="placeholder-note">
+                    📝 PLACEHOLDER: Interactive calculator will go here<br>
+                    User inputs current salary → sees potential new salary and ROI timeline
+                </div>
+                <div style="text-align: center; margin-top: 30px; padding: 20px; background: #f7fafc; border-radius: 8px;">
+                    <p style="margin: 10px 0;"><strong>Program Investment:</strong> ₹[Client to provide]</p>
+                    <p style="margin: 10px 0;"><strong>Average Starting Salary:</strong> ₹12-18L</p>
+                    <p style="margin: 10px 0;"><strong>Salary after 2 years:</strong> ₹18-24L</p>
+                    <p style="margin: 10px 0; color: #38a169; font-size: 1.2rem; font-weight: bold;">
+                        <strong>5-Year Career Earnings Advantage:</strong> ₹50L+
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; margin: 60px 0 40px; font-size: 2rem;">Real Graduate Success Stories</h3>
+
+            <div class="success-stories">
+                <div class="success-card">
+                    <div class="photo-placeholder">👤</div>
+                    <h4>[Student Name - Placeholder]</h4>
+                    <div class="before-after">
+                        <p class="before"><strong>Before:</strong> Software Support Engineer | ₹6L</p>
+                        <p class="after"><strong>After:</strong> DevOps Engineer at [Company] | ₹15L</p>
+                        <p><strong>Timeline:</strong> 7 months</p>
+                    </div>
+                    <p style="font-style: italic; margin-top: 15px;">
+                        "The hands-on projects made all the difference in interviews"
+                    </p>
+                    <div class="placeholder-note" style="margin-top: 15px;">
+                        📸 Need: Real photo & testimonial from client
+                    </div>
+                </div>
+
+                <div class="success-card">
+                    <div class="photo-placeholder">👤</div>
+                    <h4>[Student Name - Placeholder]</h4>
+                    <div class="before-after">
+                        <p class="before"><strong>Before:</strong> Career Gap (2 years)</p>
+                        <p class="after"><strong>After:</strong> Cloud Engineer at [Company] | ₹12L</p>
+                        <p><strong>Timeline:</strong> 8 months</p>
+                    </div>
+                    <p style="font-style: italic; margin-top: 15px;">
+                        "Placement support helped me negotiate better salary"
+                    </p>
+                    <div class="placeholder-note" style="margin-top: 15px;">
+                        📸 Need: Real photo & testimonial from client
+                    </div>
+                </div>
+
+                <div class="success-card">
+                    <div class="photo-placeholder">👤</div>
+                    <h4>[Student Name - Placeholder]</h4>
+                    <div class="before-after">
+                        <p class="before"><strong>Before:</strong> Fresh Graduate (Non-IT)</p>
+                        <p class="after"><strong>After:</strong> Platform Engineer at [Company] | ₹10L</p>
+                        <p><strong>Timeline:</strong> 6 months</p>
+                    </div>
+                    <p style="font-style: italic; margin-top: 15px;">
+                        "No DevOps background needed—they taught everything"
+                    </p>
+                    <div class="placeholder-note" style="margin-top: 15px;">
+                        📸 Need: Real photo & testimonial from client
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-number">92%</span>
+                    <span>Placement Rate</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">3-6 months</span>
+                    <span>Average Placement Time</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">850+</span>
+                    <span>Partner Companies</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">₹8-10L</span>
+                    <span>Avg Salary Improvement</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: CURRICULUM DETAILS -->
+    <section class="curriculum" id="curriculum">
+        <div class="container">
+            <h2 class="section-title">Complete 16-Course Curriculum</h2>
+            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem; color: #718096;">
+                Click any course to see details
+            </p>
+
+            <div class="curriculum-accordion">
+                <!-- Course 1 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>1. Red Hat Linux Administration</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Linux remains the backbone of enterprise IT, cloud platforms, and DevOps ecosystems. Over 90% of cloud and data center workloads run on Linux, making skilled Linux administrators highly employable across infrastructure, cloud, and platform engineering roles.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Linux System Administrator | Linux Support Engineer | DevOps Support
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹3.5 – 12 LPA (entry to mid)<br>
+                                ₹12 – 25 LPA (senior with cloud skills)
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Certification:</strong>
+                                RHCSA-level skills
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>2. Networking</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Networking skills are foundational for cloud, security, DevOps, and SRE roles. With enterprises moving to hybrid and multi-cloud architectures, networking professionals who understand modern connectivity, security, and troubleshooting are in constant demand.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Network Engineer | Network Administrator | Cloud Network Specialist
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹3 – 8 LPA (entry)<br>
+                                ₹8 – 18 LPA (mid-level)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>3. AWS Cloud</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>AWS continues to lead the cloud market according to Gartner Magic Quadrants. Organizations across industries are migrating workloads to AWS, creating strong demand for AWS Administrators, Cloud Engineers, and Solution Architects.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                AWS Cloud Engineer | Cloud Developer | Cloud Architect
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹6 – 30 LPA depending on role & certifications<br>
+                                Global median: ~US $128K annually
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Certification:</strong>
+                                AWS Solutions Architect Associate aligned
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 4 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>4. DevOps</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>DevOps is no longer optional—it is a standard operating model for modern IT. Gartner highlights DevOps as a key enabler for faster releases, automation, and business agility. This course equips learners with CI/CD, automation, and collaboration skills.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                DevOps Engineer | CI/CD Automation Engineer | Platform Engineer
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹4 – 15 LPA (entry to mid)<br>
+                                ₹18 – 30+ LPA (senior)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 5 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>5. Docker & Kubernetes</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Containers and Kubernetes are the backbone of cloud-native applications. Gartner consistently positions Kubernetes as a core enterprise platform technology. Professionals skilled in Docker and Kubernetes are highly sought after.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Containerization Engineer | Kubernetes Administrator (CKA) | Cloud Native DevOps
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹10 – 22 LPA (specialists within DevOps roles)
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Certification:</strong>
+                                CKA-aligned skills
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 6 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>6. Terraform (Infrastructure as Code)</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Infrastructure as Code (IaC) is a critical requirement for scalable cloud environments. Terraform is a Gartner-recognized industry standard for multi-cloud automation. This course prepares learners to design, provision, and manage infrastructure programmatically.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Cloud Infrastructure Engineer | IaC Specialist | DevOps Engineer
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                Premium in DevOps and cloud roles
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 7 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>7. Site Reliability Engineering (SRE)</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>SRE combines software engineering with operations to ensure system reliability and performance. Gartner and leading tech enterprises emphasize SRE to support large-scale digital platforms. Focus on uptime, performance, automation, and incident management.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                SRE Engineer | Reliability Engineer | Platform Reliability Specialist
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹10 – 22 LPA (mid-level)<br>
+                                Higher with leadership experience
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 8 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>8. Python for MLOps</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Python is the most widely used language in AI, automation, and MLOps. As organizations operationalize machine learning, Python-based automation and pipeline management skills are in high demand. This course bridges DevOps and AI.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Python Automation Engineer | MLOps Associate | ML Deployment Engineer
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹6 – 10 LPA (entry)<br>
+                                ₹10 – 20 LPA (with ML/Cloud expertise)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 9 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>9. MLOps (Full Stack)</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>MLOps is one of the fastest-growing domains in AI engineering. Gartner predicts rapid adoption of MLOps platforms as enterprises scale AI into production. This course prepares learners for end-to-end AI lifecycle roles.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                MLOps Engineer | ML Platform Engineer | AI Infrastructure Engineer
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹6 – 10 LPA (entry)<br>
+                                ₹10 – 20 LPA (mid)<br>
+                                ₹20 – 40 LPA (senior)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 10 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>10. VMware Virtualization</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Despite cloud growth, virtualization remains critical in enterprise data centers. VMware continues to dominate on-prem and hybrid environments. Essential for data center, cloud migration, and enterprise support roles.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Virtualization Engineer | Systems Administrator | Cloud Transition Specialist
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹4 – 15 LPA depending on experience
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 11 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>11. Nutanix Server Administration</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Hyperconverged Infrastructure (HCI) is rapidly replacing traditional data centers, and Nutanix is a Gartner Leader in this space. Prepares learners for modern data center and hybrid cloud roles.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Nutanix Administrator | HCI Engineer | Cloud Infrastructure Specialist
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹12 – 24 LPA average<br>
+                                Up to ₹70 LPA+ senior roles
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 12 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>12. Azure Administration (AZ-900 + AZ-104)</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Microsoft Azure is one of the top global cloud platforms per Gartner. This course covers both fundamentals and administrator-level skills, preparing learners for Azure Administrator, Cloud Engineer, and Hybrid Cloud roles.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Azure Administrator | Cloud Support Engineer | Azure Solutions Architect
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹4.5 – 15 LPA (mid)<br>
+                                Up to ₹35 LPA (senior)
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Certification:</strong>
+                                AZ-900 + AZ-104
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 13 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>13. Azure DevOps</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Azure DevOps plays a key role in CI/CD and enterprise DevOps transformations. Organizations using Microsoft ecosystems actively seek professionals skilled in pipelines, automation, and release management.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Azure DevOps Engineer | CI/CD Specialist | Cloud Automation Engineer
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹6 – 20 LPA (within broader cloud DevOps roles)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 14 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>14. Windows Server Administration</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>Windows Server continues to power enterprise identity, application, and infrastructure services. Skilled Windows administrators are essential for hybrid IT environments integrating on-prem and cloud platforms.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                Windows Systems Administrator | IT Support Engineer | Server Support Specialist
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹3 – 10 LPA (entry to mid)<br>
+                                Higher with cloud hybrid skills
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 15 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>15. Google Cloud Platform (GCP)</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>GCP is rapidly growing in data analytics, AI, and cloud-native workloads. Gartner recognizes Google Cloud for its strength in AI, ML, and data platforms. Prepares learners for cloud engineering roles in modern, data-driven enterprises.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                GCP Cloud Engineer | Cloud Architect | Data/Cloud Developer
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹8 – 18 LPA (mid)<br>
+                                Up to ₹35 LPA+ (senior with specialization)
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Certification:</strong>
+                                Google Cloud Associate (GCA)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 16 -->
+                <div class="course-item">
+                    <div class="course-header" onclick="toggleCourse(this)">
+                        <h3>16. ITIL® 4.0</h3>
+                        <span style="font-size: 1.5rem;">+</span>
+                    </div>
+                    <div class="course-content">
+                        <p>ITIL 4 is the global standard for IT Service Management. Enterprises value ITIL-certified professionals for structured service delivery, governance, and operational excellence. Enhances career growth for support, operations, and management roles.</p>
+                        <div class="course-details">
+                            <div class="course-detail-item">
+                                <strong>Job Roles:</strong>
+                                IT Service Manager | ITIL Practitioner | Service Delivery Analyst
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Salary Range:</strong>
+                                ₹3 – 12 LPA depending on experience and role
+                            </div>
+                            <div class="course-detail-item">
+                                <strong>Certification:</strong>
+                                ITIL® v4 Foundation
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: TRUST BUILDERS -->
+    <section class="trust">
+        <div class="container">
+            <h2 class="section-title">Why Professionals Trust Us</h2>
+
+            <h3 style="text-align: center; margin: 40px 0; font-size: 1.8rem;">Learn from Industry Veterans</h3>
+            <div class="placeholder-note" style="max-width: 600px; margin: 0 auto 40px;">
+                📝 PLACEHOLDER: Need instructor photos, names, credentials, and LinkedIn profiles from client
+            </div>
+
+            <div class="instructor-grid">
+                <div class="instructor-card">
+                    <div class="instructor-photo-placeholder">👨‍💼</div>
+                    <h4>[Instructor Name]</h4>
+                    <p>• 18+ years at Microsoft/AWS/Google</p>
+                    <p>• AWS Certified Solutions Architect</p>
+                    <p>• Trained 5,000+ engineers</p>
+                    <p style="margin-top: 15px; color: #667eea;">🔗 LinkedIn</p>
+                </div>
+
+                <div class="instructor-card">
+                    <div class="instructor-photo-placeholder">👨‍💼</div>
+                    <h4>[Instructor Name]</h4>
+                    <p>• 15+ years in DevOps & Cloud</p>
+                    <p>• CKA + Azure Certified</p>
+                    <p>• Enterprise trainer & mentor</p>
+                    <p style="margin-top: 15px; color: #667eea;">🔗 LinkedIn</p>
+                </div>
+
+                <div class="instructor-card">
+                    <div class="instructor-photo-placeholder">👨‍💼</div>
+                    <h4>[Instructor Name]</h4>
+                    <p>• 12+ years in SRE & MLOps</p>
+                    <p>• Google Cloud Professional</p>
+                    <p>• Led teams at Fortune 500</p>
+                    <p style="margin-top: 15px; color: #667eea;">🔗 LinkedIn</p>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; margin: 60px 0 40px; font-size: 1.8rem;">Our Guarantees to You</h3>
+
+            <div class="guarantee-grid">
+                <div class="guarantee-item">
+                    <span class="check">✅</span>
+                    <div>
+                        <strong>30-Day Money-Back Guarantee</strong><br>
+                        <span style="color: #718096;">No questions asked</span>
+                    </div>
+                </div>
+
+                <div class="guarantee-item">
+                    <span class="check">✅</span>
+                    <div>
+                        <strong>Job Placement Support</strong><br>
+                        <span style="color: #718096;">Until you're hired</span>
+                    </div>
+                </div>
+
+                <div class="guarantee-item">
+                    <span class="check">✅</span>
+                    <div>
+                        <strong>Curriculum Updated Quarterly</strong><br>
+                        <span style="color: #718096;">Always industry-current</span>
+                    </div>
+                </div>
+
+                <div class="guarantee-item">
+                    <span class="check">✅</span>
+                    <div>
+                        <strong>Lifetime Access</strong><br>
+                        <span style="color: #718096;">To all recorded content</span>
+                    </div>
+                </div>
+
+                <div class="guarantee-item">
+                    <span class="check">✅</span>
+                    <div>
+                        <strong>Free Skill Upgrades</strong><br>
+                        <span style="color: #718096;">New courses at no cost</span>
+                    </div>
+                </div>
+
+                <div class="guarantee-item">
+                    <span class="check">✅</span>
+                    <div>
+                        <strong>24/7 Cloud Lab Access</strong><br>
+                        <span style="color: #718096;">Real AWS, Azure, GCP environments</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="partner-logos">
+                <h3>Our Graduates Work At</h3>
+                <div class="placeholder-note" style="margin-bottom: 30px;">
+                    📝 PLACEHOLDER: Need actual company logos from client's hiring partners
+                </div>
+                <div>
+                    <span class="logo-placeholder">TCS</span>
+                    <span class="logo-placeholder">Wipro</span>
+                    <span class="logo-placeholder">Infosys</span>
+                    <span class="logo-placeholder">Accenture</span>
+                    <span class="logo-placeholder">Cognizant</span>
+                    <span class="logo-placeholder">Amazon</span>
+                    <span class="logo-placeholder">Microsoft</span>
+                    <span class="logo-placeholder">Google</span>
+                </div>
+                <p style="margin-top: 30px; color: #718096; font-size: 1.1rem;">
+                    ...and 850+ other companies across India and globally
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: FINAL CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Transform Your Career?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">Join the next generation of Platform Engineers</p>
+
+            <div class="urgency-box">
+                <p>⏰ <strong>Next Cohort Starts:</strong> [Date from Client]</p>
+                <p>🎯 <strong>Limited Spots Available</strong></p>
+                <p style="margin-top: 20px; font-size: 1rem; opacity: 0.9;">
+                    Early bird discount available for first 20 enrollments
+                </p>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Enroll in Next Cohort</a>
+                <a href="#" class="btn btn-secondary">Book Free Career Consultation</a>
+            </div>
+
+            <p style="margin-top: 40px; font-size: 0.95rem; opacity: 0.9;">
+                💳 Secure Payment | 🔒 30-Day Guarantee | 📞 24/7 Support
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Radical Technologies. All rights reserved.</p>
+            <p style="margin-top: 10px; opacity: 0.8;">
+                📧 training@radicaltechnologies.co.in | 📱 8055223360 | 🌐 radicaltechnologies.co.in
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleCourse(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('span');
+
+            // Toggle active class
+            content.classList.toggle('active');
+
+            // Change icon
+            if (content.classList.contains('active')) {
+                icon.textContent = '−';
+            } else {
+                icon.textContent = '+';
+            }
+        }
+    </script>
+
+</body>
+</html>
