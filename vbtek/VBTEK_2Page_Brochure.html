@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VBTEK - Digital Solutions Brochure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 0;
+            margin: 0 auto;
+            background: white;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ========== PAGE 1 ========== */
+        .page-1 {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-section {
+            padding: 60px 50px 40px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            font-size: 72px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #ffffff;
+        }
+
+        .tagline {
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 25px;
+            color: #e8f0fe;
+            letter-spacing: 2px;
+        }
+
+        .services-tagline {
+            font-size: 16px;
+            color: #b8d4ff;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 350px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23ffffff" opacity="0.1" width="1200" height="400"/><text x="50%25" y="50%25" font-family="Arial" font-size="24" fill="%23ffffff" opacity="0.3" text-anchor="middle" dominant-baseline="middle">Place your professional office/team image here</text></svg>') center/cover;
+            margin: 0 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+
+        .key-services {
+            padding: 40px 50px;
+            background: rgba(255,255,255,0.95);
+            color: #1e3c72;
+            margin: 40px 50px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .key-services h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #1e3c72;
+            font-weight: 700;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border-left: 4px solid #2a5298;
+            transition: transform 0.3s;
+        }
+
+        .service-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+            color: #2a5298;
+        }
+
+        .service-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #1e3c72;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            font-size: 12px;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+
+        /* ========== PAGE 2 ========== */
+        .page-2 {
+            padding: 50px;
+            background: #f8f9fa;
+        }
+
+        .page-2-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2a5298;
+        }
+
+        .page-2-header h1 {
+            font-size: 42px;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .page-2-header p {
+            font-size: 16px;
+            color: #6c757d;
+        }
+
+        .content-section {
+            margin-bottom: 35px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .content-section h2 {
+            font-size: 26px;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-left: 5px solid #2a5298;
+            padding-left: 15px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .service-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .service-item {
+            display: flex;
+            align-items: start;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            border-left: 3px solid #2a5298;
+        }
+
+        .service-item-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: #2a5298;
+        }
+
+        .service-item-content h4 {
+            font-size: 15px;
+            color: #1e3c72;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .service-item-content p {
+            font-size: 12px;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+
+        .why-choose {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .why-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .why-item::before {
+            content: "✓";
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #2a5298;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .process-step {
+            flex: 1;
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: "→";
+            position: absolute;
+            right: -22px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            color: #2a5298;
+        }
+
+        .process-step:last-child::after {
+            content: "";
+        }
+
+        .step-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        .step-text {
+            font-size: 13px;
+            line-height: 1.3;
+            font-weight: 500;
+        }
+
+        .clients-section {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .clients-section h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .clients-section p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #e8f0fe;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            color: white;
+            border: none;
+            margin-bottom: 15px;
+            padding: 0;
+        }
+
+        .contact-tagline {
+            font-size: 14px;
+            margin-bottom: 25px;
+            color: #e8f0fe;
+        }
+
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-icon {
+            font-size: 20px;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PAGE 1 -->
+    <div class="page page-1">
+        <div class="hero-section">
+            <div class="logo">VBTEK</div>
+            <div class="tagline">Digital Solutions for Business Growth</div>
+            <div class="services-tagline">Web • Software • eCommerce • Marketing • ERP • CRM • Automation</div>
+        </div>
+
+        <div class="hero-image">
+            <!-- Replace this with your professional office/team image -->
+        </div>
+
+        <div class="key-services">
+            <h2>Our Core Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Lead Generation</h3>
+                    <p>Google Ads, YouTube, LinkedIn campaigns</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Web Development</h3>
+                    <p>Corporate sites, portals, landing pages</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛒</div>
+                    <h3>eCommerce</h3>
+                    <p>B2B, B2C, D2C platforms</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>SEO & Visibility</h3>
+                    <p>Google ranking, local SEO</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Business Automation</h3>
+                    <p>Custom ERP, CRM, workflows</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3>Consulting</h3>
+                    <p>Technology & digital strategy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page page-2">
+        <div class="page-2-header">
+            <h1>VBTEK</h1>
+            <p>Pune-based Digital Solutions Company • Helping Businesses Since 2015</p>
+        </div>
+
+        <div class="two-column">
+            <div>
+                <div class="content-section">
+                    <h2>Why Choose VBTEK</h2>
+                    <div class="why-choose">
+                        <div class="why-item">Business-first development</div>
+                        <div class="why-item">Custom scalable architecture</div>
+                        <div class="why-item">Strong automation focus</div>
+                        <div class="why-item">Industry experience</div>
+                        <div class="why-item">Long-term partnership</div>
+                        <div class="why-item">Proven track record</div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2>Our Services in Detail</h2>
+                    <div class="service-list">
+                        <div class="service-item">
+                            <div class="service-item-icon">🎯</div>
+                            <div class="service-item-content">
+                                <h4>Lead Generation</h4>
+                                <p>Google Ads, YouTube Ads, LinkedIn campaigns, high-converting landing pages</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-item-icon">🔍</div>
+                            <div class="service-item-content">
+                                <h4>SEO & Visibility</h4>
+                                <p>Google ranking optimization, local SEO, comprehensive website audits</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-item-icon">🛒</div>
+                            <div class="service-item-content">
+                                <h4>eCommerce Solutions</h4>
+                                <p>B2B, B2C, D2C platforms, dropshipping integration</p>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-item-icon">⚙️</div>
+                            <div class="service-item-content">
+                                <h4>Business Automation</h4>
+                                <p>Custom ERP systems, CRM solutions, workflow automation tools</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="content-section">
+                    <h2>Our Working Process</h2>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">01</div>
+                            <div class="step-text">Analyze business goals</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">02</div>
+                            <div class="step-text">Plan roadmap</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">03</div>
+                            <div class="step-text">Build & integrate</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">04</div>
+                            <div class="step-text">Optimize & scale</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clients-section">
+                    <h3>Trusted by Leading Brands</h3>
+                    <p>Organizations associated with Godrej, Mahindra, Tata Motors, Castrol, Raymond, Colgate, Asian Paints, and Aditya Birla Group</p>
+                </div>
+
+                <div class="content-section" style="margin-top: 30px;">
+                    <h2>About VBTEK</h2>
+                    <p style="font-size: 14px; color: #495057; line-height: 1.7;">
+                        VBTEK is a Pune-based digital solutions company helping businesses grow since 2015.
+                        We build business-driven websites, scalable software platforms, and automation systems
+                        that improve efficiency and profitability. Our team combines technical expertise with
+                        business acumen to deliver solutions that drive real results.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>Let's Build Your Digital Growth Engine</h2>
+            <p class="contact-tagline">Whether you're launching a new product, automating operations, or scaling your digital presence</p>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <span class="contact-icon">📱</span>
+                    <span>+91 98225 58876</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <span>info@vbtek.in</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🌐</span>
+                    <span>www.vbtek.in</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
