@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VendorHub — Vendor Onboarding Portal</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .hero {
+    padding: 6rem 0 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(108,99,255,0.18) 0%, transparent 70%);
+    top: -100px; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(108,99,255,0.12);
+    border: 1px solid rgba(108,99,255,0.3);
+    border-radius: 50px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.78rem;
+    color: var(--purple-light);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    max-width: 700px;
+    margin: 0 auto 1rem;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--purple), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 2rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 3.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--glass-border);
+  }
+  .hero-stat .num { font-size: 1.8rem; font-weight: 800; color: var(--purple-light); }
+  .hero-stat .lbl { font-size: 0.8rem; color: var(--text-muted); }
+
+  .features-section { padding: 4rem 0; }
+  .features-section h2 { text-align: center; font-size: 1.7rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .features-section > .container > p { text-align: center; color: var(--text-muted); margin-bottom: 2.5rem; }
+  .feature-card { transition: transform 0.2s; }
+  .feature-card:hover { transform: translateY(-4px); }
+  .feature-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .feature-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+  .how-section { padding: 4rem 0; }
+  .how-section h2 { text-align: center; font-size: 1.7rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .how-section > .container > p { text-align: center; color: var(--text-muted); margin-bottom: 3rem; }
+  .how-steps { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+  .how-step {
+    flex: 1; min-width: 160px; max-width: 200px;
+    text-align: center;
+    position: relative;
+  }
+  .how-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -1rem;
+    top: 1.2rem;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+  }
+  @media (max-width: 700px) { .how-step:not(:last-child)::after { display: none; } }
+  .how-num {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), #8b5cf6);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 700;
+    margin: 0 auto 0.8rem;
+    box-shadow: 0 4px 16px rgba(108,99,255,0.4);
+  }
+  .how-step h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .how-step p { font-size: 0.78rem; color: var(--text-muted); }
+
+  .cta-section {
+    padding: 4rem 0 5rem;
+    text-align: center;
+  }
+  .cta-box {
+    max-width: 640px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(0,212,170,0.08));
+    border: 1px solid rgba(108,99,255,0.25);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+  }
+  .cta-box h2 { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.7rem; }
+  .cta-box p { color: var(--text-muted); margin-bottom: 1.8rem; font-size: 0.95rem; }
+  footer {
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--glass-border);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-icon">🏪</div>
+    VendorHub
+  </a>
+  <div class="nav-links">
+    <a href="dashboard.html">My Status</a>
+    <a href="admin.html">Admin</a>
+    <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">✦ Vendor Partner Program</div>
+    <h1>Onboard Faster.<br/><span>Grow Together.</span></h1>
+    <p>Join our trusted vendor network. Complete your onboarding in minutes and start collaborating with our procurement team.</p>
+    <div class="hero-actions">
+      <a href="register.html" class="btn btn-primary">🚀 Start Onboarding</a>
+      <a href="dashboard.html" class="btn btn-outline">📋 Check My Status</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">2,400+</div><div class="lbl">Active Vendors</div></div>
+      <div class="hero-stat"><div class="num">48 hrs</div><div class="lbl">Avg. Approval Time</div></div>
+      <div class="hero-stat"><div class="num">₹500 Cr</div><div class="lbl">Annual Procurement</div></div>
+      <div class="hero-stat"><div class="num">98%</div><div class="lbl">Satisfaction Rate</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="container">
+    <h2>Why Partner With Us?</h2>
+    <p>Everything you need to build a lasting business relationship</p>
+    <div class="grid-3">
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:rgba(108,99,255,0.15)">⚡</div>
+        <h3>Fast Approval</h3>
+        <p>Our streamlined review process ensures vendors hear back within 48 hours of complete document submission.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:rgba(0,212,170,0.15)">🔒</div>
+        <h3>Secure & Compliant</h3>
+        <p>Your documents and financial data are encrypted and handled in full compliance with data protection regulations.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:rgba(255,217,61,0.15)">📊</div>
+        <h3>Real-time Tracking</h3>
+        <p>Track your application status at every stage through your personalized vendor dashboard.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:rgba(255,107,107,0.15)">💰</div>
+        <h3>Timely Payments</h3>
+        <p>Enjoy predictable payment cycles with 30/60/90-day NET terms tailored to your business needs.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:rgba(108,99,255,0.15)">🤝</div>
+        <h3>Dedicated Support</h3>
+        <p>A dedicated vendor relationship manager is assigned to help you through the onboarding journey.</p>
+      </div>
+      <div class="card feature-card">
+        <div class="feature-icon" style="background:rgba(0,212,170,0.15)">🌐</div>
+        <h3>Multi-Category</h3>
+        <p>We work with vendors across Electronics, FMCG, IT, Construction, Logistics and 30+ more categories.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="container">
+    <h2>How It Works</h2>
+    <p>5 simple steps to become an approved vendor</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <h4>Company Info</h4>
+        <p>Basic details about your organization</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <h4>Business Details</h4>
+        <p>GST, category & financials</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <h4>Documents</h4>
+        <p>Upload required certificates</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <h4>Bank Details</h4>
+        <p>Payment account information</p>
+      </div>
+      <div class="how-step">
+        <div class="how-num">5</div>
+        <h4>Review & Submit</h4>
+        <p>Confirm and submit your application</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Ready to Get Started?</h2>
+      <p>Join thousands of vendors who trust VendorHub for seamless procurement partnerships.</p>
+      <a href="register.html" class="btn btn-primary">Begin Onboarding Now →</a>
+      <div class="mt-2 text-sm text-muted">Already applied? <a href="dashboard.html" style="color:var(--purple-light)">Check your status</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 VendorHub. All rights reserved. | Vendor Onboarding Portal Prototype</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

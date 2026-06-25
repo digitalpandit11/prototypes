@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — VendorHub</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .dashboard-wrap { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* ── Vendor header card ── */
+  .vendor-header {
+    background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(0,212,170,0.08));
+    border: 1px solid rgba(108,99,255,0.25);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 0;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .vendor-avatar { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--purple), var(--teal)); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 0.7rem; }
+  .vendor-id { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
+  .status-block { text-align: right; }
+  .status-block .since { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+  /* ── Onboarding progress track ── */
+  .progress-track { display: flex; justify-content: space-between; margin: 1.5rem 0 0; position: relative; }
+  .progress-track::before { content: ''; position: absolute; top: 14px; left: 10%; right: 10%; height: 3px; background: var(--glass-border); z-index: 0; }
+  .progress-fill { position: absolute; top: 14px; left: 10%; height: 3px; background: linear-gradient(90deg, var(--purple), var(--teal)); z-index: 1; transition: width 0.6s ease; }
+  .pt-step { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; flex: 1; z-index: 2; }
+  .pt-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--glass); border: 2px solid var(--glass-border); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+  .pt-dot.done { background: var(--teal); border-color: var(--teal); }
+  .pt-dot.current { background: var(--purple); border-color: var(--purple); box-shadow: 0 0 12px rgba(108,99,255,0.5); }
+  .pt-label { font-size: 0.68rem; color: var(--text-muted); text-align: center; white-space: nowrap; }
+  .pt-step.done .pt-label, .pt-step.current .pt-label { color: var(--text); }
+
+  /* ── Dashboard tab nav ── */
+  .dash-tabs {
+    display: flex; gap: 0;
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 2rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow-x: auto;
+  }
+  .dash-tab {
+    padding: 0.85rem 1.4rem; font-size: 0.875rem; font-weight: 600;
+    color: var(--text-muted); cursor: pointer; border: none;
+    background: none; font-family: 'Poppins', sans-serif;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap; display: flex; align-items: center; gap: 0.4rem;
+  }
+  .dash-tab:hover { color: var(--text); }
+  .dash-tab.active { color: var(--purple-light); border-bottom-color: var(--purple); }
+  .dash-tab .tab-badge {
+    background: rgba(108,99,255,0.18); color: var(--purple-light);
+    border-radius: 50px; padding: 0.1rem 0.45rem; font-size: 0.7rem;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── Overview grid ── */
+  .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+  @media (max-width: 760px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+  .doc-list { list-style: none; }
+  .doc-list li { display: flex; justify-content: space-between; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+  .doc-list li:last-child { border-bottom: none; }
+  .doc-status { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; }
+
+  /* ── Bills & Payments ── */
+  .bp-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-bottom: 1.5rem; }
+  @media (max-width: 700px) { .bp-stats { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 400px) { .bp-stats { grid-template-columns: 1fr 1fr; } }
+
+  .bp-stat {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 1.1rem 1rem;
+    backdrop-filter: blur(14px);
+  }
+  .bp-stat .bs-label { font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+  .bp-stat .bs-value { font-size: 1.4rem; font-weight: 800; }
+  .bp-stat .bs-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+  .bill-status-paid    { color: var(--teal); }
+  .bill-status-pending { color: var(--yellow); }
+  .bill-status-overdue { color: var(--red); }
+  .bill-status-partial { color: #a78bfa; }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 0.2rem 0.65rem; border-radius: 50px;
+    font-size: 0.72rem; font-weight: 600;
+  }
+  .pill-paid    { background: rgba(0,212,170,0.12);  color: var(--teal);   border: 1px solid rgba(0,212,170,0.25); }
+  .pill-pending { background: rgba(255,217,61,0.12); color: var(--yellow); border: 1px solid rgba(255,217,61,0.25); }
+  .pill-overdue { background: rgba(255,107,107,0.12);color: var(--red);    border: 1px solid rgba(255,107,107,0.25); }
+  .pill-partial { background: rgba(167,139,250,0.12);color: #a78bfa;       border: 1px solid rgba(167,139,250,0.25); }
+
+  .bp-section-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+
+  /* Payment history timeline */
+  .pay-timeline { list-style: none; }
+  .pay-tl-item { display: flex; gap: 1rem; padding-bottom: 1.2rem; position: relative; }
+  .pay-tl-item:not(:last-child)::before { content: ''; position: absolute; left: 14px; top: 30px; width: 2px; height: calc(100% - 6px); background: var(--glass-border); }
+  .pay-tl-dot { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
+  .pay-tl-dot.credit { background: rgba(0,212,170,0.15); border: 2px solid var(--teal); }
+  .pay-tl-dot.debit  { background: rgba(255,107,107,0.15); border: 2px solid var(--red); }
+  .pay-tl-dot.info   { background: rgba(108,99,255,0.15); border: 2px solid var(--purple); }
+  .pay-tl-body .pt-title { font-size: 0.85rem; font-weight: 600; }
+  .pay-tl-body .pt-meta  { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem; }
+  .pay-tl-amount { margin-left: auto; text-align: right; white-space: nowrap; }
+  .pay-tl-amount .amt { font-weight: 700; font-size: 0.9rem; }
+  .pay-tl-amount .amt-date { font-size: 0.72rem; color: var(--text-muted); }
+
+  .locked-overlay {
+    text-align: center; padding: 4rem 2rem;
+    background: rgba(0,0,0,0.15);
+    border-radius: var(--radius);
+    border: 1px dashed var(--glass-border);
+  }
+  .locked-overlay .lock-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .locked-overlay h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .locked-overlay p { color: var(--text-muted); font-size: 0.88rem; }
+
+  /* Empty state */
+  .empty-vendor { text-align: center; padding: 4rem 2rem; }
+  .empty-vendor .big-icon { font-size: 4rem; margin-bottom: 1rem; }
+  .empty-vendor h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .empty-vendor p { color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem; }
+
+  /* Table tweaks */
+  .inv-table th, .inv-table td { padding: 0.75rem 0.9rem; }
+  .inv-amount { font-weight: 700; }
+  .inv-overdue-flag { font-size: 0.7rem; color: var(--red); display: block; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-icon">🏪</div>
+    VendorHub
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="admin.html">Admin Panel</a>
+    <a href="register.html" class="btn btn-primary btn-sm">New Application</a>
+  </div>
+</nav>
+
+<div class="dashboard-wrap">
+  <div id="dashboardContent"></div>
+</div>
+
+<div class="toast-container"></div>
+
+<script src="js/app.js"></script>
+<script>
+/* ── Mock bills data per vendor ── */
+function getMockBills(vendorId) {
+  const seed = parseInt(vendorId.replace(/\D/g,'')) || 1001;
+  const companies = {
+    1001: 'Apex Manufacturing Ltd.',
+    1002: 'SwiftLogix Distributors',
+    1003: 'GreenLeaf Organics',
+    1004: 'TechEdge Solutions',
+    1005: 'BuildRight Construction'
+  };
+  const r = (n, base) => base + (seed % n);
+  return [
+    { inv: 'INV-2026-0041', po: 'PO-8821', date: '2026-06-01', due: '2026-06-30', amount: 184500, paid: 184500, status: 'paid',    desc: 'Supply of electronic components – Batch #A41' },
+    { inv: 'INV-2026-0038', po: 'PO-8790', date: '2026-05-18', due: '2026-06-17', amount: 97200,  paid: 97200,  status: 'paid',    desc: 'Logistics services – May 2026' },
+    { inv: 'INV-2026-0036', po: 'PO-8755', date: '2026-05-05', due: '2026-07-10', amount: 256000, paid: 0,      status: 'pending', desc: 'Raw material supply – Order #B-2255' },
+    { inv: 'INV-2026-0031', po: 'PO-8710', date: '2026-04-20', due: '2026-05-20', amount: 63800,  paid: 30000,  status: 'partial', desc: 'Consulting & IT services – Q1 2026' },
+    { inv: 'INV-2026-0028', po: 'PO-8680', date: '2026-04-01', due: '2026-05-01', amount: 112000, paid: 0,      status: 'overdue', desc: 'Packaging material – March batch' },
+    { inv: 'INV-2026-0022', po: 'PO-8640', date: '2026-03-15', due: '2026-04-14', amount: 45600,  paid: 45600,  status: 'paid',    desc: 'Maintenance & spare parts supply' },
+    { inv: 'INV-2026-0019', po: 'PO-8610', date: '2026-03-01', due: '2026-03-31', amount: 320000, paid: 320000, status: 'paid',    desc: 'Bulk supply – Q4 order settlement' },
+  ];
+}
+
+function getMockPayments(vendorId) {
+  return [
+    { type: 'credit', icon: '💰', title: 'Payment Received', meta: 'INV-2026-0041 · NEFT Transfer', amount: '₹1,84,500', date: '02 Jun 2026', color: 'var(--teal)' },
+    { type: 'info',   icon: '📋', title: 'Invoice Raised',   meta: 'INV-2026-0036 · PO-8755',       amount: '₹2,56,000', date: '05 May 2026', color: 'var(--purple-light)' },
+    { type: 'credit', icon: '💰', title: 'Payment Received', meta: 'INV-2026-0038 · RTGS Transfer',  amount: '₹97,200',   date: '19 May 2026', color: 'var(--teal)' },
+    { type: 'credit', icon: '💰', title: 'Partial Payment',  meta: 'INV-2026-0031 · Advance',        amount: '₹30,000',   date: '28 Apr 2026', color: 'var(--teal)' },
+    { type: 'info',   icon: '🔔', title: 'Payment Overdue',  meta: 'INV-2026-0028 · Follow-up sent', amount: '₹1,12,000', date: '02 May 2026', color: 'var(--red)' },
+    { type: 'credit', icon: '💰', title: 'Payment Received', meta: 'INV-2026-0022 · NEFT Transfer',  amount: '₹45,600',   date: '15 Apr 2026', color: 'var(--teal)' },
+    { type: 'credit', icon: '💰', title: 'Payment Received', meta: 'INV-2026-0019 · RTGS Transfer',  amount: '₹3,20,000', date: '02 Apr 2026', color: 'var(--teal)' },
+  ];
+}
+
+function fmtAmt(n) {
+  return '₹' + n.toLocaleString('en-IN');
+}
+
+/* ── Render helpers ── */
+function renderEmpty() {
+  document.getElementById('dashboardContent').innerHTML = `
+    <div class="card empty-vendor">
+      <div class="big-icon">📋</div>
+      <h2>No Application Found</h2>
+      <p>You haven't submitted a vendor application yet.<br/>Complete your registration to track your onboarding status here.</p>
+      <a href="register.html" class="btn btn-primary">Start Onboarding</a>
+    </div>
+  `;
+}
+
+function getProgressStep(status) {
+  return { pending: 1, review: 2, approved: 4, rejected: 4 }[status] || 1;
+}
+
+function getNotifications(status, company) {
+  const base = [
+    { icon: '📤', type: 'info',    title: 'Application Received',    msg: 'Your vendor application has been successfully submitted.',                                     time: 'Jun 10, 2026' },
+    { icon: '📧', type: 'info',    title: 'Confirmation Email Sent', msg: 'A confirmation email has been sent to your registered address.',                               time: 'Jun 10, 2026' }
+  ];
+  if (status === 'review' || status === 'approved' || status === 'rejected')
+    base.push({ icon: '🔍', type: 'info',    title: 'Review Started',          msg: 'Our compliance team has begun reviewing your documents.',                           time: 'Jun 12, 2026' });
+  if (status === 'approved') {
+    base.push({ icon: '✅', type: 'success', title: 'Application Approved!',   msg: `Congratulations! ${company} is now an approved vendor. Welcome aboard!`,           time: 'Jun 14, 2026' });
+    base.push({ icon: '💳', type: 'success', title: 'Payment Terms Activated', msg: 'NET-30 payment terms have been activated for your account.',                        time: 'Jun 14, 2026' });
+  }
+  if (status === 'rejected')
+    base.push({ icon: '❌', type: 'warning', title: 'Application Rejected',    msg: 'Your application could not be approved. Please contact support or re-apply.',       time: 'Jun 14, 2026' });
+  return base;
+}
+
+/* ── Main render ── */
+function renderDashboard(vendor) {
+  const progressStep = getProgressStep(vendor.status);
+  const fillPct = ['0%','0%','30%','65%','100%'][progressStep] || '30%';
+  const steps = [
+    { label: 'Submitted', icon: '📤' },
+    { label: 'Under Review', icon: '🔍' },
+    { label: 'Verification', icon: '🔐' },
+    { label: vendor.status === 'rejected' ? 'Rejected' : 'Approved', icon: vendor.status === 'rejected' ? '❌' : '✅' }
+  ];
+
+  const isApproved = vendor.status === 'approved';
+  const bills = getMockBills(vendor.id);
+  const payments = getMockPayments(vendor.id);
+  const notifications = getNotifications(vendor.status, vendor.company);
+
+  // Bill stats
+  const totalAmt   = bills.reduce((s,b) => s + b.amount, 0);
+  const paidAmt    = bills.reduce((s,b) => s + b.paid, 0);
+  const pendingAmt = bills.filter(b => b.status==='pending').reduce((s,b) => s + b.amount, 0);
+  const overdueAmt = bills.filter(b => b.status==='overdue').reduce((s,b) => s + b.amount, 0);
+
+  const pillClass = { paid:'pill-paid', pending:'pill-pending', overdue:'pill-overdue', partial:'pill-partial' };
+  const pillLabel = { paid:'✅ Paid', pending:'🕐 Pending', overdue:'🔴 Overdue', partial:'⚡ Partial' };
+
+  document.getElementById('dashboardContent').innerHTML = `
+
+    <!-- Vendor Header -->
+    <div style="margin-bottom:0">
+      <div class="vendor-header">
+        <div style="flex:1;min-width:260px">
+          <div class="vendor-avatar">🏢</div>
+          <h2 style="font-size:1.35rem;font-weight:800">${vendor.company}</h2>
+          <div class="text-muted text-sm">${vendor.type} · ${vendor.category || '—'}</div>
+          <div class="vendor-id">ID: ${vendor.id} &nbsp;|&nbsp; Submitted: ${vendor.submittedAt}</div>
+          <div class="progress-track" style="margin-top:1.8rem;width:100%;min-width:260px">
+            <div class="progress-fill" style="width:${fillPct}"></div>
+            ${steps.map((s,i) => `
+              <div class="pt-step ${i<progressStep?'done':i===progressStep?'current':''}">
+                <div class="pt-dot ${i<progressStep?'done':i===progressStep?'current':''}">${i<progressStep?'✓':s.icon}</div>
+                <div class="pt-label">${s.label}</div>
+              </div>`).join('')}
+          </div>
+        </div>
+        <div class="status-block">
+          ${statusBadge(vendor.status)}
+          <div class="since">Last updated: ${vendor.submittedAt}</div>
+          ${isApproved ? `<div style="margin-top:0.8rem;font-size:0.78rem;color:var(--teal)">💳 NET-30 Payment Terms</div>` : ''}
+          ${vendor.status==='rejected' ? `<a href="register.html" class="btn btn-outline btn-sm" style="margin-top:0.8rem">Re-apply</a>` : ''}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Nav (flush below header card) -->
+    <div class="dash-tabs" style="margin-top:0;border-radius:0 0 0 0">
+      <button class="dash-tab active" data-tab="overview">📊 Overview</button>
+      <button class="dash-tab" data-tab="bills">
+        💰 Bills &amp; Payments
+        ${isApproved ? `<span class="tab-badge">${bills.filter(b=>b.status==='pending'||b.status==='overdue').length}</span>` : ''}
+      </button>
+      <button class="dash-tab" data-tab="documents">📁 My Documents</button>
+      <button class="dash-tab" data-tab="support">💬 Support</button>
+    </div>
+
+    <!-- ══ TAB: OVERVIEW ══ -->
+    <div class="tab-panel active" id="tp-overview">
+      <div class="dashboard-grid">
+        <div style="display:flex;flex-direction:column;gap:1.5rem">
+
+          <div class="card">
+            <div style="font-weight:700;margin-bottom:1rem;font-size:0.95rem">🏢 Company Details</div>
+            <div class="info-row"><span class="label">Email</span><span class="value">${vendor.email||'—'}</span></div>
+            <div class="info-row"><span class="label">Phone</span><span class="value">${vendor.phone||'—'}</span></div>
+            <div class="info-row"><span class="label">Website</span><span class="value">${vendor.website||'—'}</span></div>
+            <div class="info-row"><span class="label">GST / Tax ID</span><span class="value">${vendor.gst||'—'}</span></div>
+            <div class="info-row"><span class="label">Annual Turnover</span><span class="value">${vendor.turnover||'—'}</span></div>
+            <div class="info-row"><span class="label">Years in Business</span><span class="value">${vendor.years||'—'}</span></div>
+          </div>
+
+          <div class="card">
+            <div style="font-weight:700;margin-bottom:1rem;font-size:0.95rem">🏦 Payment Details</div>
+            <div class="info-row"><span class="label">Bank</span><span class="value">${vendor.bank||'—'}</span></div>
+            <div class="info-row"><span class="label">Account Number</span><span class="value">${vendor.account||'—'}</span></div>
+            <div class="info-row"><span class="label">IFSC Code</span><span class="value">${vendor.ifsc||'—'}</span></div>
+            <div class="info-row"><span class="label">Account Type</span><span class="value">${vendor.accountType||'—'}</span></div>
+          </div>
+
+          ${isApproved ? `
+          <div class="card">
+            <div style="font-weight:700;margin-bottom:1rem;font-size:0.95rem">💰 Payment Summary</div>
+            <div class="info-row"><span class="label">Total Invoices</span><span class="value">${bills.length}</span></div>
+            <div class="info-row"><span class="label">Total Billed</span><span class="value">${fmtAmt(totalAmt)}</span></div>
+            <div class="info-row"><span class="label">Amount Received</span><span class="value" style="color:var(--teal)">${fmtAmt(paidAmt)}</span></div>
+            <div class="info-row"><span class="label">Pending</span><span class="value" style="color:var(--yellow)">${fmtAmt(pendingAmt)}</span></div>
+            ${overdueAmt > 0 ? `<div class="info-row"><span class="label">Overdue</span><span class="value" style="color:var(--red)">${fmtAmt(overdueAmt)}</span></div>` : ''}
+            <div style="margin-top:1rem">
+              <button class="btn btn-outline btn-sm" onclick="switchTab('bills')">View All Bills →</button>
+            </div>
+          </div>` : ''}
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:1.5rem">
+          <div class="card">
+            <div style="font-weight:700;margin-bottom:1rem;font-size:0.95rem">🔔 Notifications</div>
+            ${notifications.map(n=>`
+              <div class="notification-item">
+                <div class="notif-icon ${n.type}">${n.icon}</div>
+                <div>
+                  <div style="font-size:0.85rem;font-weight:600">${n.title}</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem">${n.msg}</div>
+                  <div style="font-size:0.72rem;color:var(--text-muted);margin-top:0.3rem">${n.time}</div>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB: BILLS & PAYMENTS ══ -->
+    <div class="tab-panel" id="tp-bills">
+      ${isApproved ? `
+
+        <!-- Stat Cards -->
+        <div class="bp-stats">
+          <div class="bp-stat">
+            <div class="bs-label">Total Invoices</div>
+            <div class="bs-value">${bills.length}</div>
+            <div class="bs-sub">All time</div>
+          </div>
+          <div class="bp-stat">
+            <div class="bs-label">Amount Payable</div>
+            <div class="bs-value" style="color:var(--yellow);font-size:1.15rem">${fmtAmt(pendingAmt + overdueAmt)}</div>
+            <div class="bs-sub">${bills.filter(b=>b.status==='pending'||b.status==='overdue').length} open invoices</div>
+          </div>
+          <div class="bp-stat">
+            <div class="bs-label">Total Received</div>
+            <div class="bs-value" style="color:var(--teal);font-size:1.15rem">${fmtAmt(paidAmt)}</div>
+            <div class="bs-sub">${bills.filter(b=>b.status==='paid').length} invoices paid</div>
+          </div>
+          <div class="bp-stat">
+            <div class="bs-label">Overdue</div>
+            <div class="bs-value" style="color:${overdueAmt>0?'var(--red)':'var(--teal)'};font-size:1.15rem">${fmtAmt(overdueAmt)}</div>
+            <div class="bs-sub">${bills.filter(b=>b.status==='overdue').length} invoice(s)</div>
+          </div>
+        </div>
+
+        <!-- Invoices Table -->
+        <div class="card" style="margin-bottom:1.5rem">
+          <div class="bp-section-title">
+            <span>📄 Invoices</span>
+            <div style="display:flex;gap:0.5rem">
+              <button class="btn btn-outline btn-sm" onclick="filterBills('all',this)">All</button>
+              <button class="btn btn-outline btn-sm" onclick="filterBills('pending',this)">Pending</button>
+              <button class="btn btn-outline btn-sm" onclick="filterBills('overdue',this)">Overdue</button>
+              <button class="btn btn-outline btn-sm" onclick="filterBills('paid',this)">Paid</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="inv-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>PO Ref.</th>
+                  <th>Description</th>
+                  <th>Invoice Date</th>
+                  <th>Due Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="billsTableBody">
+                ${renderBillRows(bills)}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Payment History -->
+        <div class="grid-2" style="gap:1.5rem">
+          <div class="card">
+            <div class="bp-section-title"><span>🏦 Payment History</span></div>
+            <ul class="pay-timeline">
+              ${payments.map(p=>`
+                <li class="pay-tl-item">
+                  <div class="pay-tl-dot ${p.type}">${p.icon}</div>
+                  <div class="pay-tl-body" style="flex:1">
+                    <div class="pt-title">${p.title}</div>
+                    <div class="pt-meta">${p.meta}</div>
+                  </div>
+                  <div class="pay-tl-amount">
+                    <div class="amt" style="color:${p.color}">${p.amount}</div>
+                    <div class="amt-date">${p.date}</div>
+                  </div>
+                </li>`).join('')}
+            </ul>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:1.5rem">
+            <div class="card">
+              <div class="bp-section-title"><span>📋 Payment Terms</span></div>
+              <div class="info-row"><span class="label">Terms</span><span class="value">NET-30</span></div>
+              <div class="info-row"><span class="label">Currency</span><span class="value">INR (₹)</span></div>
+              <div class="info-row"><span class="label">Payment Mode</span><span class="value">NEFT / RTGS</span></div>
+              <div class="info-row"><span class="label">TDS Applicable</span><span class="value">Yes — 2%</span></div>
+              <div class="info-row"><span class="label">Credit Limit</span><span class="value">₹10,00,000</span></div>
+              <div class="info-row"><span class="label">Bank</span><span class="value">${vendor.bank||'—'}</span></div>
+              <div class="info-row"><span class="label">Account No.</span><span class="value">${vendor.account||'—'}</span></div>
+            </div>
+
+            <div class="card">
+              <div class="bp-section-title"><span>📊 Quick Stats</span></div>
+              <div style="margin-bottom:1rem">
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:0.3rem">
+                  <span>Collection Rate</span><span style="color:var(--teal);font-weight:700">78%</span>
+                </div>
+                <div style="background:rgba(255,255,255,0.07);border-radius:50px;height:6px;overflow:hidden">
+                  <div style="width:78%;height:100%;background:linear-gradient(90deg,var(--purple),var(--teal));border-radius:50px"></div>
+                </div>
+              </div>
+              <div style="margin-bottom:1rem">
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:0.3rem">
+                  <span>On-time Payments</span><span style="color:var(--purple-light);font-weight:700">85%</span>
+                </div>
+                <div style="background:rgba(255,255,255,0.07);border-radius:50px;height:6px;overflow:hidden">
+                  <div style="width:85%;height:100%;background:linear-gradient(90deg,var(--purple),#8b5cf6);border-radius:50px"></div>
+                </div>
+              </div>
+              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.5rem">Based on last 6 months</div>
+            </div>
+          </div>
+        </div>
+
+      ` : `
+        <div class="locked-overlay">
+          <div class="lock-icon">🔒</div>
+          <h3>Bills & Payments Not Available</h3>
+          <p>This section is only available after your vendor application is approved.<br/>
+          Once approved, you'll be able to view invoices, track payments, and check your payment history here.</p>
+          <div style="margin-top:1.5rem">${statusBadge(vendor.status)}</div>
+        </div>
+      `}
+    </div>
+
+    <!-- ══ TAB: MY DOCUMENTS ══ -->
+    <div class="tab-panel" id="tp-documents">
+      <div class="card">
+        <div style="font-weight:700;margin-bottom:1.2rem;font-size:0.95rem">📁 Submitted Documents</div>
+        <ul class="doc-list">
+          ${[['pan','PAN Card'],['gst','GST Certificate'],['bank','Bank Letter / Cancelled Cheque'],['trade','Trade License / MSME']].map(([k,label])=>`
+            <li>
+              <div>
+                <div style="font-weight:500;font-size:0.88rem">${label}</div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.15rem">${k==='pan'||k==='gst'?'Mandatory':'Optional'}</div>
+              </div>
+              <span class="doc-status">
+                ${vendor.docs&&vendor.docs[k]
+                  ? `<span style="color:var(--teal)">✅</span> <span style="color:var(--teal);font-size:0.78rem">${vendor.docs[k]}</span>
+                     <button class="btn btn-outline btn-sm" style="margin-left:0.5rem;font-size:0.72rem;padding:0.2rem 0.6rem" onclick="showToast('Download simulated for: ${vendor.docs[k]}')">⬇ Download</button>`
+                  : `<span style="color:var(--text-muted)">— Not uploaded</span>
+                     <a href="register.html" class="btn btn-outline btn-sm" style="margin-left:0.5rem;font-size:0.72rem;padding:0.2rem 0.6rem">Upload</a>`
+                }
+              </span>
+            </li>`).join('')}
+        </ul>
+      </div>
+
+      ${isApproved ? `
+      <div class="card" style="margin-top:1.5rem">
+        <div style="font-weight:700;margin-bottom:1.2rem;font-size:0.95rem">📋 Compliance Checklist</div>
+        ${[
+          ['✅','GST Registration','Valid until Dec 2026'],
+          ['✅','PAN Verification','Verified with IT Dept'],
+          ['✅','Bank Account Verified','PENNY DROP confirmed'],
+          ['✅','MSME / Trade License','Uploaded & reviewed'],
+          ['⚠️','ISO Certification','Optional — not submitted'],
+          ['⚠️','Quality Audit Report','Pending from vendor'],
+        ].map(([icon,label,note])=>`
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+            <div>
+              <div style="font-size:0.87rem;font-weight:500">${icon} ${label}</div>
+              <div style="font-size:0.74rem;color:var(--text-muted)">${note}</div>
+            </div>
+            <span class="${icon==='✅'?'pill pill-paid':'pill pill-pending'}">${icon==='✅'?'Verified':'Pending'}</span>
+          </div>`).join('')}
+      </div>` : ''}
+    </div>
+
+    <!-- ══ TAB: SUPPORT ══ -->
+    <div class="tab-panel" id="tp-support">
+      <div class="grid-2" style="gap:1.5rem;margin-bottom:1.5rem">
+        <div class="card">
+          <div style="font-weight:700;margin-bottom:1rem;font-size:0.95rem">💬 Contact Vendor Support</div>
+          <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.2rem">Our team typically responds within 4 business hours.</p>
+          <div class="form-group"><label>Subject</label>
+            <select><option>Payment query</option><option>Document re-upload</option><option>Status enquiry</option><option>Technical issue</option><option>Other</option></select>
+          </div>
+          <div class="form-group"><label>Message</label>
+            <textarea rows="4" placeholder="Describe your issue or query…" style="resize:vertical"></textarea>
+          </div>
+          <button class="btn btn-primary" onclick="showToast('Support ticket raised! Ticket ID: #VH-'+Math.floor(Math.random()*90000+10000))">📨 Submit Ticket</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1.5rem">
+          <div class="card">
+            <div style="font-weight:700;margin-bottom:1rem;font-size:0.95rem">📞 Direct Contact</div>
+            <div class="info-row"><span class="label">Email</span><span class="value">vendors@vendorhub.in</span></div>
+            <div class="info-row"><span class="label">Phone</span><span class="value">+91 80-4600-1234</span></div>
+            <div class="info-row"><span class="label">WhatsApp</span><span class="value">+91 98765 00001</span></div>
+            <div class="info-row"><span class="label">Hours</span><span class="value">Mon–Fri, 9 AM–6 PM IST</span></div>
+          </div>
+          <div class="card">
+            <div style="font-weight:700;margin-bottom:1rem;font-size:0.95rem">📚 Quick Links</div>
+            ${[['📄','Vendor Policy Document'],['💳','Payment Terms & Conditions'],['📦','Purchase Order Guidelines'],['🔄','Document Re-submission Guide']].map(([icon,label])=>`
+              <div style="display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.85rem;cursor:pointer" onclick="showToast('${label} — document download simulated')">
+                <span>${icon}</span><span style="color:var(--purple-light)">${label}</span><span style="margin-left:auto;color:var(--text-muted)">↗</span>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Bind tab clicks
+  document.querySelectorAll('.dash-tab').forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'tp-' + name));
+}
+
+function renderBillRows(bills) {
+  return bills.map(b => `
+    <tr>
+      <td><span style="color:var(--purple-light);font-weight:600;font-size:0.85rem">${b.inv}</span></td>
+      <td style="font-size:0.82rem;color:var(--text-muted)">${b.po}</td>
+      <td style="font-size:0.82rem;max-width:200px">${b.desc}</td>
+      <td style="font-size:0.82rem">${b.date}</td>
+      <td style="font-size:0.82rem">
+        ${b.due}
+        ${b.status==='overdue' ? `<span class="inv-overdue-flag">Overdue by ${daysDiff(b.due)} days</span>` : ''}
+      </td>
+      <td class="inv-amount">${fmtAmt(b.amount)}</td>
+      <td><span class="pill ${pillClass[b.status]}">${pillLabel[b.status]}</span>
+        ${b.status==='partial' ? `<div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.2rem">Paid: ${fmtAmt(b.paid)}</div>` : ''}
+      </td>
+      <td>
+        <button class="btn btn-outline btn-sm" style="font-size:0.72rem;padding:0.2rem 0.6rem" onclick="showToast('Invoice ${b.inv} download simulated')">⬇ PDF</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+const pillClass = { paid:'pill-paid', pending:'pill-pending', overdue:'pill-overdue', partial:'pill-partial' };
+const pillLabel = { paid:'✅ Paid', pending:'🕐 Pending', overdue:'🔴 Overdue', partial:'⚡ Partial' };
+
+function daysDiff(dueDate) {
+  const today = new Date('2026-06-25');
+  const due = new Date(dueDate);
+  return Math.max(0, Math.floor((today - due) / 86400000));
+}
+
+function filterBills(status, btn) {
+  const vendor = getCurrentVendor();
+  const all = getMockBills(vendor ? vendor.id : 'VND-1001');
+  const filtered = status === 'all' ? all : all.filter(b => b.status === status);
+  document.getElementById('billsTableBody').innerHTML = renderBillRows(filtered);
+}
+
+/* ── Boot ── */
+const vendor = getCurrentVendor();
+if (vendor) {
+  const all = getVendors();
+  const fresh = all.find(v => v.id === vendor.id);
+  if (fresh) { vendor.status = fresh.status; setCurrentVendor(vendor); }
+  renderDashboard(vendor);
+} else {
+  renderEmpty();
+}
+</script>
+</body>
+</html>

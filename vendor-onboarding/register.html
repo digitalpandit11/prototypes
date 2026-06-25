@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Register — VendorHub</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  .register-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .register-header { margin-bottom: 2rem; }
+  .register-header h1 { font-size: 1.6rem; font-weight: 800; }
+  .register-header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem; }
+
+  .form-card { position: relative; }
+  .step-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--glass-border);
+  }
+  .doc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 560px) { .doc-grid { grid-template-columns: 1fr; } }
+
+  .review-heading {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--purple-light);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    margin-top: 1.2rem;
+  }
+  .review-heading:first-child { margin-top: 0; }
+  .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.6rem; }
+  @media (max-width: 500px) { .review-grid { grid-template-columns: 1fr; } }
+  .step5-docs { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  @media (max-width: 500px) { .step5-docs { grid-template-columns: 1fr; } }
+  .doc-chip {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: rgba(0,212,170,0.08);
+    border: 1px solid rgba(0,212,170,0.2);
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    color: var(--teal);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-icon">🏪</div>
+    VendorHub
+  </a>
+  <div class="nav-links">
+    <a href="index.html">← Back to Home</a>
+  </div>
+</nav>
+
+<div class="register-wrap">
+  <div class="register-header">
+    <h1>Vendor Registration</h1>
+    <p>Complete all 5 steps to submit your onboarding application.</p>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="steps-bar" id="stepsBar">
+    <div class="step-item active" data-step="1">
+      <div class="step-circle">1</div>
+      <div class="step-label">Company</div>
+    </div>
+    <div class="step-item" data-step="2">
+      <div class="step-circle">2</div>
+      <div class="step-label">Business</div>
+    </div>
+    <div class="step-item" data-step="3">
+      <div class="step-circle">3</div>
+      <div class="step-label">Documents</div>
+    </div>
+    <div class="step-item" data-step="4">
+      <div class="step-circle">4</div>
+      <div class="step-label">Bank</div>
+    </div>
+    <div class="step-item" data-step="5">
+      <div class="step-circle">✓</div>
+      <div class="step-label">Review</div>
+    </div>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="card form-card">
+
+    <!-- STEP 1: Company Info -->
+    <div class="step-panel active" id="step1">
+      <div class="section-title">🏢 Company Information</div>
+      <div class="form-group">
+        <label>Company Name *</label>
+        <input type="text" id="companyName" placeholder="e.g. Apex Industries Pvt. Ltd." />
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Company Type *</label>
+          <select id="companyType">
+            <option value="">Select type</option>
+            <option>Manufacturer</option>
+            <option>Distributor</option>
+            <option>Retailer</option>
+            <option>Service Provider</option>
+            <option>Trader</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Company Website</label>
+          <input type="text" id="website" placeholder="www.yourcompany.com" />
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="email" placeholder="procurement@company.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="phone" placeholder="+91 98765 43210" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Registered Address</label>
+        <input type="text" id="address" placeholder="Full registered office address" />
+      </div>
+      <div class="step-nav">
+        <button class="btn btn-primary" onclick="nextStep(1)">Next: Business Details →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Business Details -->
+    <div class="step-panel" id="step2">
+      <div class="section-title">📊 Business Details</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>GST / Tax ID *</label>
+          <input type="text" id="gst" placeholder="e.g. 27AAPFU0939F1ZV" maxlength="15" />
+        </div>
+        <div class="form-group">
+          <label>PAN Number *</label>
+          <input type="text" id="pan" placeholder="e.g. AAPFU0939F" maxlength="10" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Business Category *</label>
+        <select id="category">
+          <option value="">Select category</option>
+          <option>Electronics & Components</option>
+          <option>FMCG & Consumer Goods</option>
+          <option>IT & Software</option>
+          <option>Food & Beverages</option>
+          <option>Construction & Infra</option>
+          <option>Logistics & Supply Chain</option>
+          <option>Pharmaceuticals</option>
+          <option>Textiles & Apparel</option>
+          <option>Automotive & Parts</option>
+          <option>Industrial Equipment</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Years in Business *</label>
+          <select id="years">
+            <option value="">Select</option>
+            <option>Less than 1 year</option>
+            <option>1-3 years</option>
+            <option>3-5 years</option>
+            <option>5-10 years</option>
+            <option>10-20 years</option>
+            <option>More than 20 years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Annual Turnover *</label>
+          <select id="turnover">
+            <option value="">Select range</option>
+            <option>Below ₹1 Cr</option>
+            <option>₹1 Cr – ₹5 Cr</option>
+            <option>₹5 Cr – ₹10 Cr</option>
+            <option>₹10 Cr – ₹50 Cr</option>
+            <option>₹50 Cr – ₹100 Cr</option>
+            <option>Above ₹100 Cr</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Number of Employees</label>
+        <select id="employees">
+          <option value="">Select range</option>
+          <option>1-10</option>
+          <option>11-50</option>
+          <option>51-200</option>
+          <option>201-500</option>
+          <option>500+</option>
+        </select>
+      </div>
+      <div class="step-nav">
+        <button class="btn btn-outline" onclick="prevStep(2)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(2)">Next: Documents →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Documents -->
+    <div class="step-panel" id="step3">
+      <div class="section-title">📁 Document Upload</div>
+      <p class="text-muted text-sm mb-2">Upload clear scanned copies or PDFs. Max 5MB per file.</p>
+      <div class="doc-grid">
+        <div class="form-group">
+          <label>PAN Card *</label>
+          <div class="upload-area" id="uploadPan">
+            <input type="file" accept=".pdf,.jpg,.png" onchange="handleFile(this,'pan','uploadPan')" />
+            <div class="upload-icon">📄</div>
+            <div class="upload-label">Drop or <span>browse</span></div>
+            <div class="file-name" id="fileName-pan">No file chosen</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>GST Certificate *</label>
+          <div class="upload-area" id="uploadGst">
+            <input type="file" accept=".pdf,.jpg,.png" onchange="handleFile(this,'gst','uploadGst')" />
+            <div class="upload-icon">📋</div>
+            <div class="upload-label">Drop or <span>browse</span></div>
+            <div class="file-name" id="fileName-gst">No file chosen</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Bank Letter / Cancelled Cheque *</label>
+          <div class="upload-area" id="uploadBank">
+            <input type="file" accept=".pdf,.jpg,.png" onchange="handleFile(this,'bank','uploadBank')" />
+            <div class="upload-icon">🏦</div>
+            <div class="upload-label">Drop or <span>browse</span></div>
+            <div class="file-name" id="fileName-bank">No file chosen</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Trade License / MSME Certificate</label>
+          <div class="upload-area" id="uploadTrade">
+            <input type="file" accept=".pdf,.jpg,.png" onchange="handleFile(this,'trade','uploadTrade')" />
+            <div class="upload-icon">🪪</div>
+            <div class="upload-label">Drop or <span>browse</span></div>
+            <div class="file-name" id="fileName-trade">No file chosen</div>
+          </div>
+        </div>
+      </div>
+      <div class="step-nav">
+        <button class="btn btn-outline" onclick="prevStep(3)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(3)">Next: Bank Details →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Bank Details -->
+    <div class="step-panel" id="step4">
+      <div class="section-title">🏦 Bank Details</div>
+      <p class="text-muted text-sm mb-2">Payment will be processed to this account after order fulfilment.</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Bank Name *</label>
+          <select id="bankName">
+            <option value="">Select bank</option>
+            <option>State Bank of India</option>
+            <option>HDFC Bank</option>
+            <option>ICICI Bank</option>
+            <option>Axis Bank</option>
+            <option>Kotak Mahindra Bank</option>
+            <option>Punjab National Bank</option>
+            <option>Bank of Baroda</option>
+            <option>Canara Bank</option>
+            <option>Union Bank of India</option>
+            <option>Yes Bank</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Account Type *</label>
+          <select id="accountType">
+            <option value="">Select type</option>
+            <option>Current</option>
+            <option>Savings</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Account Holder Name *</label>
+        <input type="text" id="accountHolder" placeholder="As per bank records" />
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Account Number *</label>
+          <input type="text" id="accountNumber" placeholder="Enter account number" />
+        </div>
+        <div class="form-group">
+          <label>Confirm Account Number *</label>
+          <input type="text" id="accountNumberConfirm" placeholder="Re-enter account number" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>IFSC Code *</label>
+        <input type="text" id="ifsc" placeholder="e.g. HDFC0001234" maxlength="11" style="text-transform:uppercase" />
+      </div>
+      <div class="step-nav">
+        <button class="btn btn-outline" onclick="prevStep(4)">← Back</button>
+        <button class="btn btn-primary" onclick="nextStep(4)">Next: Review →</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Review & Submit -->
+    <div class="step-panel" id="step5">
+      <div class="section-title">✅ Review & Submit</div>
+      <p class="text-muted text-sm mb-2">Please review your information before submitting.</p>
+
+      <div class="review-heading">🏢 Company Information</div>
+      <div class="review-grid" id="review-company"></div>
+
+      <div class="review-heading">📊 Business Details</div>
+      <div class="review-grid" id="review-business"></div>
+
+      <div class="review-heading">📁 Uploaded Documents</div>
+      <div class="step5-docs" id="review-docs"></div>
+
+      <div class="review-heading">🏦 Bank Details</div>
+      <div class="review-grid" id="review-bank"></div>
+
+      <div class="divider"></div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="tnc" />
+        <label for="tnc">I confirm that all information provided is accurate and I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Vendor Code of Conduct</a>.</label>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-outline" onclick="prevStep(5)">← Back</button>
+        <button class="btn btn-success" onclick="submitForm()">🚀 Submit Application</button>
+      </div>
+    </div>
+
+  </div><!-- /.card -->
+</div>
+
+<div class="toast-container"></div>
+
+<script src="js/app.js"></script>
+<script>
+  let currentStep = 1;
+  const totalSteps = 5;
+  const uploadedFiles = { pan: null, gst: null, bank: null, trade: null };
+
+  function getVal(id) { return (document.getElementById(id) || {}).value || ''; }
+
+  function updateStepsBar(step) {
+    document.querySelectorAll('.step-item').forEach((el, i) => {
+      el.classList.remove('active', 'done');
+      if (i + 1 < step) el.classList.add('done');
+      else if (i + 1 === step) el.classList.add('active');
+    });
+  }
+
+  function showStep(step) {
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step' + step).classList.add('active');
+    updateStepsBar(step);
+    currentStep = step;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validateStep(step) {
+    const rules = {
+      1: [['companyName','Company name'],['companyType','Company type'],['email','Email'],['phone','Phone']],
+      2: [['gst','GST/Tax ID'],['pan','PAN Number'],['category','Business category'],['years','Years in business'],['turnover','Annual turnover']],
+      3: [],
+      4: [['bankName','Bank name'],['accountType','Account type'],['accountHolder','Account holder name'],['accountNumber','Account number'],['ifsc','IFSC code']]
+    };
+    for (const [id, label] of (rules[step] || [])) {
+      if (!getVal(id).trim()) { showToast(`Please fill in: ${label}`, 'error'); return false; }
+    }
+    if (step === 3) {
+      if (!uploadedFiles.pan || !uploadedFiles.gst || !uploadedFiles.bank) {
+        showToast('Please upload PAN Card, GST Certificate and Bank Letter', 'error'); return false;
+      }
+    }
+    if (step === 4) {
+      if (getVal('accountNumber') !== getVal('accountNumberConfirm')) {
+        showToast('Account numbers do not match', 'error'); return false;
+      }
+    }
+    return true;
+  }
+
+  function nextStep(step) {
+    if (!validateStep(step)) return;
+    if (step === 4) buildReview();
+    showStep(step + 1);
+  }
+
+  function prevStep(step) { showStep(step - 1); }
+
+  function handleFile(input, key, areaId) {
+    const file = input.files[0];
+    if (!file) return;
+    uploadedFiles[key] = file.name;
+    document.getElementById('fileName-' + key).textContent = file.name;
+    document.getElementById(areaId).style.borderColor = 'var(--teal)';
+  }
+
+  function ri(label, value) {
+    return `<div class="review-item"><div class="ri-label">${label}</div><div class="ri-value">${value || '—'}</div></div>`;
+  }
+
+  function buildReview() {
+    document.getElementById('review-company').innerHTML =
+      ri('Company Name', getVal('companyName')) +
+      ri('Type', getVal('companyType')) +
+      ri('Email', getVal('email')) +
+      ri('Phone', getVal('phone')) +
+      ri('Website', getVal('website') || '—') +
+      ri('Address', getVal('address') || '—');
+
+    document.getElementById('review-business').innerHTML =
+      ri('GST / Tax ID', getVal('gst')) +
+      ri('PAN Number', getVal('pan')) +
+      ri('Category', getVal('category')) +
+      ri('Years in Business', getVal('years')) +
+      ri('Annual Turnover', getVal('turnover')) +
+      ri('Employees', getVal('employees') || '—');
+
+    const docLabels = { pan: 'PAN Card', gst: 'GST Certificate', bank: 'Bank Letter', trade: 'Trade License' };
+    document.getElementById('review-docs').innerHTML = Object.entries(uploadedFiles)
+      .map(([k, v]) => v ? `<div class="doc-chip">✅ <span>${docLabels[k]}: ${v}</span></div>` : `<div class="doc-chip" style="opacity:0.5;border-color:rgba(255,107,107,0.2);color:var(--text-muted)">— ${docLabels[k]}: Not uploaded</div>`)
+      .join('');
+
+    const acc = getVal('accountNumber');
+    document.getElementById('review-bank').innerHTML =
+      ri('Bank', getVal('bankName')) +
+      ri('Account Type', getVal('accountType')) +
+      ri('Account Holder', getVal('accountHolder')) +
+      ri('Account Number', acc ? '****' + acc.slice(-4) : '—') +
+      ri('IFSC Code', getVal('ifsc').toUpperCase());
+  }
+
+  function submitForm() {
+    if (!document.getElementById('tnc').checked) {
+      showToast('Please accept the Terms & Conditions', 'error'); return;
+    }
+    const vendor = {
+      id: genId(),
+      company: getVal('companyName'),
+      type: getVal('companyType'),
+      category: getVal('category'),
+      email: getVal('email'),
+      phone: getVal('phone'),
+      website: getVal('website'),
+      address: getVal('address'),
+      gst: getVal('gst'),
+      pan: getVal('pan'),
+      years: getVal('years'),
+      turnover: getVal('turnover'),
+      employees: getVal('employees'),
+      bank: getVal('bankName'),
+      accountType: getVal('accountType'),
+      accountHolder: getVal('accountHolder'),
+      account: '****' + getVal('accountNumber').slice(-4),
+      ifsc: getVal('ifsc').toUpperCase(),
+      docs: { ...uploadedFiles },
+      submittedAt: new Date().toISOString().split('T')[0],
+      status: 'pending'
+    };
+    const vendors = getVendors();
+    vendors.push(vendor);
+    saveVendors(vendors);
+    setCurrentVendor(vendor);
+    showToast('Application submitted successfully!');
+    setTimeout(() => { window.location.href = 'dashboard.html'; }, 1200);
+  }
+</script>
+</body>
+</html>
