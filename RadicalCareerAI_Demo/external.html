@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Careers — Employer site (demo)</title>
+<link rel="stylesheet" href="assets/css/app.css">
+<style>
+ body{background:#f2f4f8}
+ .browser{background:#e7e9ee;padding:10px 14px;display:flex;gap:10px;align-items:center;border-bottom:1px solid #d5d8df}
+ .dots i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;background:#c9ccd4}
+ .url{flex:1;background:#fff;border-radius:20px;padding:6px 16px;color:#5b6070;font-size:13px}
+ .site{max-width:960px;margin:0 auto;padding:30px 24px}
+ .hdr{background:#0f2a4a;color:#fff;padding:22px 30px;border-radius:14px 14px 0 0;display:flex;align-items:center;gap:16px}
+ .hdr .lg{width:56px;height:56px;border-radius:12px;background:#1f8fff;display:grid;place-items:center;font:700 22px Arial}
+ .body{background:#fff;padding:26px 30px;border-radius:0 0 14px 14px;border:1px solid #dfe3ea;border-top:0}
+ .banner{background:#0B0B0F;color:#fff;padding:9px 16px;font-size:12.5px;text-align:center}
+ .banner b{color:#8fe3c3}
+ h1,h2{font-family:Arial,sans-serif}
+ .btn.blue{background:#1f8fff;border-color:#1f8fff;color:#fff}
+</style>
+</head>
+<body>
+<div class="banner">You are on a <b>simulated employer website</b> — in the live product this tab opens the company’s real careers / job-board page. Close this tab to return to Radical CareerAI.</div>
+<div class="browser"><span class="dots"><i></i><i></i><i></i></span><div class="url" id="url">careers.example.com</div></div>
+<div class="site" id="site"></div>
+<script src="assets/js/data.js"></script>
+<script>
+ (function(){
+   const D = RC.DATA, id = new URLSearchParams(location.search).get('job') || 'j1', j = D.jobById(id) || D.jobs[0];
+   const host = j.company.toLowerCase().replace(/[^a-z]/g,'') ;
+   document.title = j.title + ' — ' + j.company;
+   document.getElementById('url').textContent = (j.src==='site'||j.src==='radical' ? 'careers.' : j.src + '-listing.') + host + '.example/jobs/' + j.id.toUpperCase() + '  (simulated page)';
+   document.getElementById('site').innerHTML = `<div class="hdr"><div class="lg">${j.company[0]}</div><div><div style="opacity:.7;font-size:13px">${j.src==='site'||j.src==='radical' ? 'Careers' : j.srcLabel}</div><h1 style="margin:2px 0 0;font-size:24px">${j.title}</h1><div style="opacity:.8">${j.company} · ${j.city} · ${j.mode}</div></div></div>
+   <div class="body"><div id="main"><div class="row gap8 wrap mb16"><span class="badge">₹${j.lo}–${j.hi} LPA</span><span class="badge">${j.exp}</span><span class="badge">${j.mode}</span></div>
+   <h2>About the role</h2><p>${j.about}</p><h2>Responsibilities</h2><ul>${j.resp.map(r=>'<li>'+r+'</li>').join('')}</ul><h2>Requirements</h2><ul>${j.skills.map(s=>'<li>'+s+'</li>').join('')}</ul>
+   <button class="btn blue lg" id="ap">Apply for this job</button></div>
+   <div id="form" style="display:none"><h2>Apply for ${j.title}</h2><div class="g2 mt16"><div class="field"><label class="f">Full name</label><input class="input" value="Aarav Sharma"></div><div class="field"><label class="f">Email</label><input class="input" value="aarav.sharma@example.com"></div><div class="field"><label class="f">Phone</label><input class="input" value="+91 98765 43210"></div><div class="field"><label class="f">Current location</label><input class="input" value="Pune"></div></div><div class="field"><label class="f">Resume</label><div class="dropzone" style="padding:14px">Aarav_Sharma_Resume_${j.company.split(' ')[0]}.pdf attached</div></div><div class="field"><label class="f">Cover letter</label><textarea class="input">Attached — see cover letter PDF.</textarea></div><button class="btn blue lg" id="sub">Submit application</button></div>
+   <div id="done" style="display:none;text-align:center;padding:40px"><div style="width:70px;height:70px;border-radius:50%;background:#e2f4ee;color:#0B7E62;display:grid;place-items:center;margin:0 auto 12px;font-size:34px">✓</div><h2>Application submitted</h2><p class="muted">Thanks! The recruiter will review your profile. You can close this tab and go back to Radical CareerAI — we’ll ask you to confirm you applied.</p><button class="btn lg" onclick="window.close()">Close this tab</button></div></div>`;
+   document.getElementById('ap').onclick = () => { document.getElementById('main').style.display='none'; document.getElementById('form').style.display='block'; };
+   document.getElementById('sub').onclick = () => { document.getElementById('form').style.display='none'; document.getElementById('done').style.display='block'; };
+ })();
+</script>
+</body>
+</html>
