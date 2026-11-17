@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyNest — Self-Study Centre Management (Prototype)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Libraries are vendored in lib/ so the demo runs offline, straight from the file system. -->
+  <script src="lib/tailwind.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Poppins', 'Segoe UI', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { 50: '#f1f0ff', 100: '#e4e2ff', 200: '#cbc7ff', 500: '#6C63FF', 600: '#5a51ec', 700: '#4a42cc' },
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="app">
+    <div class="boot">Loading prototype…</div>
+  </div>
+
+  <script src="lib/vue.global.prod.js"></script>
+  <script src="lib/vue-router.global.prod.js"></script>
+  <script src="lib/chart.umd.min.js"></script>
+  <script src="lib/lucide.min.js"></script>
+
+  <!-- Core: mock data, business rules, state -->
+  <script src="js/data/seed.js"></script>
+  <script src="js/services/rules.js"></script>
+  <script src="js/services/store.js"></script>
+
+  <!-- Shared UI -->
+  <script src="js/components/ui.js"></script>
+  <script src="js/components/widgets.js"></script>
+  <script src="js/layouts/shells.js"></script>
+
+  <!-- Screens -->
+  <script src="js/pages/login.js"></script>
+  <script src="js/pages/admin/dashboard.js"></script>
+  <script src="js/pages/admin/students.js"></script>
+  <script src="js/pages/admin/memberships.js"></script>
+  <script src="js/pages/admin/branches.js"></script>
+  <script src="js/pages/admin/seats.js"></script>
+  <script src="js/pages/admin/attendance.js"></script>
+  <script src="js/pages/admin/payments.js"></script>
+  <script src="js/pages/admin/operations.js"></script>
+  <script src="js/pages/admin/reports.js"></script>
+  <script src="js/pages/staff/staff.js"></script>
+  <script src="js/pages/student/portal.js"></script>
+
+  <script src="js/router.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

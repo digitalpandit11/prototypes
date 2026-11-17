@@ -9,7 +9,8 @@ add a note here** rather than leaving it in a chat.
 
 - **[project_stack](project_stack.md)** — Tech stack and design conventions used across all prototypes in this repo
 - **[project_vendor_onboarding](project_vendor_onboarding.md)** — Vendor Onboarding Portal prototype built in vendor-onboarding/ folder — pages, features, tech stack, and what was added
+- **[project_selfstudy](project_selfstudy.md)** — StudyNest self-study centre management prototype in selfstudy/ — Vue 3 via vendored scripts (no build), roles, state
 
 ---
 
-*2 notes.*
+*3 notes.*

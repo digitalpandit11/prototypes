@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BPositive Deliverables Annexure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1e2a44;
+    --muted: #5b6478;
+    --line: #d9dee8;
+    --soft: #f4f6fa;
+    --brand: #c8102e;
+    --p1: #c2410c;
+    --p1-soft: #fdf0e7;
+    --p2: #4f46e5;
+    --p2-soft: #ebeafd;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    background: #e9ecf2;
+    color: var(--ink);
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+  }
+  .page {
+    width: 210mm;
+    margin: 12mm auto;
+    padding: 16mm 15mm;
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(30, 42, 68, .12);
+  }
+  h1, h2, h3 { line-height: 1.25; margin: 0; }
+  p { margin: 0 0 3mm; }
+  .muted { color: var(--muted); }
+  .small { font-size: 8.8pt; }
+
+  /* Header */
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm;
+          border-bottom: 2px solid var(--brand); padding-bottom: 4mm; margin-bottom: 5mm; }
+  .head .brand-bar { height: 5px; width: 50px; background: var(--brand); border-radius: 3px; margin-bottom: 4mm; }
+  .head .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: 8.5pt; color: var(--brand); font-weight: 600; }
+  .head h1 { font-size: 21pt; margin-top: 1mm; }
+  .head .meta { font-size: 8.8pt; text-align: right; color: var(--muted); white-space: nowrap; }
+  .head .meta b { color: var(--ink); font-weight: 500; }
+
+  h2 { font-size: 13pt; margin: 6mm 0 2mm; }
+  h2 .phase { vertical-align: middle; }
+  .phase { display: inline-block; white-space: nowrap; font-size: 8.5pt; font-weight: 600; padding: 0 9px; border-radius: 999px; }
+  .phase.p1 { background: var(--p1-soft); color: var(--p1); border: 1px solid #f3cfb4; }
+  .phase.p2 { background: var(--p2-soft); color: var(--p2); border: 1px solid #d5d3fa; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 8.8pt; line-height: 1.35; margin: 0 0 4mm; }
+  th, td { border: 1px solid var(--line); padding: 1.15mm 2.2mm; text-align: left; vertical-align: top; }
+  thead th { background: var(--ink); color: #fff; font-weight: 600; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  .c-no   { width: 11mm; color: var(--muted); }
+  .c-unit { width: 22mm; }
+
+  tr.group td { background: var(--soft); font-weight: 600; border-top: 2px solid #c9d0dc; }
+  .p1t tr.group td:first-child { color: var(--p1); }
+  .p2t tr.group td:first-child { color: var(--p2); }
+  td .note { display: block; font-size: 8pt; color: var(--muted); }
+
+
+  .toolbar { position: fixed; right: 20px; bottom: 20px; display: flex; gap: 8px; }
+  .toolbar button {
+    font: 600 13px 'Poppins', sans-serif; border: 0; border-radius: 999px; padding: 11px 20px; cursor: pointer;
+    background: var(--brand); color: #fff; box-shadow: 0 6px 18px rgba(200, 16, 46, .3);
+  }
+  
+  @page { size: A4; margin: 12mm 13mm; }
+  @media print {
+    body { background: #fff; }
+    .page { width: auto; margin: 0; padding: 0; box-shadow: none; }
+    .toolbar { display: none; }
+    .break { break-before: page; }
+  }
+  @media screen and (max-width: 820px) {
+    .page { width: auto; margin: 0; padding: 20px 16px; }
+    .head { flex-direction: column; align-items: flex-start; }
+    .head .meta { text-align: left; white-space: normal; }
+      .c-unit { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button type="button" onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<main class="page">
+  <header class="head">
+    <div>
+      <div class="brand-bar"></div>
+      <div class="eyebrow">Annexure to Quotation</div>
+      <h1>BPositive Commerce Platform</h1>
+      <div class="muted">Scope of deliverables: Phase 1 and Phase 2</div>
+    </div>
+    <div class="meta">
+      Date: <b>26 October 2026</b><br>
+      Ref: <b>concept.html (Parts 1 &amp; 2)</b><br>
+      Status: <b>Draft</b>
+    </div>
+  </header>
+
+  <h2>Phase overview</h2>
+  <table class="summary">
+    <thead><tr><th style="width:22mm">Phase</th><th>Scope</th></tr></thead>
+    <tbody>
+      <tr><td><span class="phase p1">Phase 1</span></td><td>B2C storefront, B2B portal, admin panel, integrations, stock inward, receive-against-order, project delivery</td></tr>
+      <tr><td><span class="phase p2">Phase 2</span></td><td>Intelligent vendor finder &amp; purchase orders, automation and analytics</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ================= PHASE 1 ================= -->
+  <h2>Deliverables <span class="phase p1">Phase 1</span></h2>
+  <table class="p1t" data-phase="p1">
+    <thead><tr><th class="c-no">#</th><th>Deliverable / unit</th><th class="c-unit">Unit</th></tr></thead>
+    <tbody>
+      <tr class="group"><td>1</td><td colspan="2">B2C Storefront</td></tr>
+      <tr><td class="c-no">1.1</td><td>Home page with category &amp; banner sections</td><td>Screen set</td></tr>
+      <tr><td class="c-no">1.2</td><td>Product listing with search, filters &amp; sort</td><td>Screen set</td></tr>
+      <tr><td class="c-no">1.3</td><td>Product detail page (images, specs, stock status)</td><td>Screen</td></tr>
+      <tr><td class="c-no">1.4</td><td>Cart &amp; checkout (address, delivery charge, coupons)</td><td>Module</td></tr>
+      <tr><td class="c-no">1.5</td><td>Payment options: online gateway + COD with pincode / order-value rules</td><td>Module</td></tr>
+      <tr><td class="c-no">1.6</td><td>Customer account: OTP login, addresses, order history, tracking</td><td>Module</td></tr>
+
+      <tr class="group"><td>2</td><td colspan="2">B2B Portal</td></tr>
+      <tr><td class="c-no">2.1</td><td>Business registration, KYC / GSTIN upload, approval workflow</td><td>Module</td></tr>
+      <tr><td class="c-no">2.2</td><td>Multiple users per business with roles</td><td>Module</td></tr>
+      <tr><td class="c-no">2.3</td><td>Catalogue with business-specific prices &amp; slab discounts</td><td>Module</td></tr>
+      <tr><td class="c-no">2.4</td><td>Quick order by SKU, bulk quantities, re-order from history</td><td>Module</td></tr>
+      <tr><td class="c-no">2.5</td><td>Checkout with payment terms (Advance / COD / Credit) and credit-limit check</td><td>Module</td></tr>
+      <tr><td class="c-no">2.6</td><td>Buyer dashboard: open orders, awaiting receipt, due, overdue, credit available</td><td>Screen</td></tr>
+      <tr><td class="c-no">2.7</td><td>My Orders &amp; live tracking, document downloads (draft bill, invoice)</td><td>Module</td></tr>
+      <tr><td class="c-no">2.8</td><td>Receive Material against order: line-wise quantities, condition, photos</td><td>Module</td></tr>
+      <tr><td class="c-no">2.9</td><td>Payments: bills, pay online, report NEFT / UTR, account statement</td><td>Module</td></tr>
+      <tr><td class="c-no">2.10</td><td>Discrepancies: raise and track tickets</td><td>Module</td></tr>
+
+      <tr class="group"><td>3</td><td colspan="2">Admin Panel</td></tr>
+      <tr><td class="c-no">3.1</td><td>Unified order queue (B2C + B2B): confirm, edit, cancel, holds</td><td>Module</td></tr>
+      <tr><td class="c-no">3.2</td><td>Warehouse: pick list, packing, weight &amp; dimensions, Ready to Ship</td><td>Module</td></tr>
+      <tr><td class="c-no">3.3</td><td>Shipping: courier rate comparison, booking, AWB &amp; label, tracking, RTO</td><td>Module</td></tr>
+      <tr><td class="c-no">3.4</td><td>Billing: draft bill, GST invoice, credit notes</td><td>Module</td></tr>
+      <tr><td class="c-no">3.5</td><td>Collections: UTR verification, COD remittance matching, reminders, overdue blocking</td><td>Module</td></tr>
+      <tr><td class="c-no">3.6</td><td>B2B accounts: approval, price list, payment term, credit limit, ledger</td><td>Module</td></tr>
+      <tr><td class="c-no">3.7</td><td>Pricing: B2C prices &amp; promotions; B2B price lists, contract rates, slabs, validity</td><td>Module</td></tr>
+      <tr><td class="c-no">3.8</td><td>Catalogue: products, SKUs, images, categories, bulk upload</td><td>Module</td></tr>
+      <tr><td class="c-no">3.9</td><td>Stock Inward with buying rate, stock adjustment, physical count, average cost</td><td>Module</td></tr>
+      <tr><td class="c-no">3.10</td><td>Discrepancy Desk: open tickets, photos, resolution (re-ship / credit note)</td><td>Module</td></tr>
+      <tr><td class="c-no">3.11</td><td>Reports: sales by channel, receivables ageing, courier performance, stock &amp; margin</td><td>Module</td></tr>
+      <tr><td class="c-no">3.12</td><td>Admin users, roles &amp; permissions, audit log</td><td>Module</td></tr>
+
+      <tr class="group"><td>4</td><td colspan="2">Integrations</td></tr>
+      <tr><td class="c-no">4.1</td><td>Payment gateway (checkout + B2B pay-online links)</td><td>Integration</td></tr>
+      <tr><td class="c-no">4.2</td><td>Courier / shipping aggregator API: rates, booking, labels, tracking<span class="note">One integration per courier partner</span></td><td>Integration</td></tr>
+      <tr><td class="c-no">4.3</td><td>SMS / WhatsApp notifications (order, shipping, bill, reminders)</td><td>Integration</td></tr>
+      <tr><td class="c-no">4.4</td><td>Transactional email (order confirmations, bills, statements)</td><td>Integration</td></tr>
+
+      <tr class="group"><td>5</td><td colspan="2">Project delivery</td></tr>
+      <tr><td class="c-no">5.1</td><td>UI / UX design: B2C store, B2B portal, admin panel</td><td>Lump sum</td></tr>
+      <tr><td class="c-no">5.2</td><td>Testing &amp; UAT support</td><td>Lump sum</td></tr>
+      <tr><td class="c-no">5.3</td><td>Deployment &amp; go-live: server set-up, domain, SSL</td><td>Lump sum</td></tr>
+      <tr><td class="c-no">5.4</td><td>Training &amp; user guides (admin team, B2B buyers)</td><td>Lump sum</td></tr>
+      <tr><td class="c-no">5.5</td><td>Post go-live warranty support<span class="note">Period to be agreed</span></td><td>Lump sum</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ================= PHASE 2 ================= -->
+  <h2 class="break">Deliverables <span class="phase p2">Phase 2</span></h2>
+  <table class="p2t" data-phase="p2">
+    <thead><tr><th class="c-no">#</th><th>Deliverable / unit</th><th class="c-unit">Unit</th></tr></thead>
+    <tbody>
+      <tr class="group"><td>6</td><td colspan="2">Procurement: intelligent vendor finder</td></tr>
+      <tr><td class="c-no">6.1</td><td>Vendor master: vendors, items supplied, terms, contacts</td><td>Module</td></tr>
+      <tr><td class="c-no">6.2</td><td>Purchase-need triggers: low-stock alert, B2B order shortfall, manual request</td><td>Module</td></tr>
+      <tr><td class="c-no">6.3</td><td>Vendor finder: ranking by price history, lead time, fill rate, quality, distance</td><td>Module</td></tr>
+      <tr><td class="c-no">6.4</td><td>Compare / RFQ and purchase-order approval</td><td>Module</td></tr>
+      <tr><td class="c-no">6.5</td><td>Purchase order generation &amp; dispatch to vendor (email / WhatsApp)</td><td>Module</td></tr>
+      <tr><td class="c-no">6.6</td><td>Receive against PO (GRN), with Stock Inward pre-filled</td><td>Module</td></tr>
+      <tr><td class="c-no">6.7</td><td>Vendor scoring from every receipt (rate, delay, shortfall)</td><td>Module</td></tr>
+
+      <tr class="group"><td>7</td><td colspan="2">Automation &amp; analytics</td></tr>
+      <tr><td class="c-no">7.1</td><td>Automatic courier recommendation (cheapest / fastest)</td><td>Module</td></tr>
+      <tr><td class="c-no">7.2</td><td>Automatic bank-statement matching for NEFT / RTGS payments</td><td>Module</td></tr>
+      <tr><td class="c-no">7.3</td><td>Discrepancy analytics by SKU, courier and picker</td><td>Module</td></tr>
+      <tr><td class="c-no">7.4</td><td>B2B buyer-side order approvals &amp; branch budgets</td><td>Module</td></tr>
+
+      <tr class="group"><td>8</td><td colspan="2">Project delivery (Phase 2)</td></tr>
+      <tr><td class="c-no">8.1</td><td>UI / UX design for Phase 2 screens</td><td>Lump sum</td></tr>
+      <tr><td class="c-no">8.2</td><td>Testing, UAT support &amp; deployment</td><td>Lump sum</td></tr>
+      <tr><td class="c-no">8.3</td><td>Training &amp; user-guide updates</td><td>Lump sum</td></tr>
+    </tbody>
+  </table>
+
+</main>
+
+</body>
+</html>
